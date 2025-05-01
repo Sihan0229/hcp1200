@@ -93,30 +93,32 @@ nn_seg_brain = UNet(
 nn_seg_brain_train = UNet(
     C_in=1, C_hid=[16,32,32,32,32], C_out=1).to(device)
 
-nn_seg_brain.load_state_dict(
-    torch.load('./seg/model/model_seg_brain.pt', map_location=device))
+# nn_seg_brain.load_state_dict(
+#     torch.load('./seg/model/model_seg_brain.pt', map_location=device))
 
 nn_seg_brain_train.load_state_dict(
-    torch.load('./results_train_model/model_seg_brain.pt', map_location=device))
+    torch.load('./result_train_model/model_seg_brain_all.pt', map_location=device))
 
 # ============ dHCP DL-based neonatal training pipeline ============
 if __name__ == '__main__':
     # subj_list = sorted(glob.glob(in_dir+'*'+t2_suffix))
-    subj_list = sorted(glob.glob(os.path.join(in_dir, '**', '*' + t2_suffix), recursive=True))
+    subj_list = sorted(glob.glob(os.path.join(in_dir, '**', t2_suffix), recursive=True))
     print(subj_list)
 
     for subj_t2_dir in tqdm(subj_list):
         # extract subject id
-        subj_id = subj_t2_dir.split('/')[-1][:-len(t2_suffix)]
+        # subj_id = subj_t2_dir.split('/')[-1][:-len(t2_suffix)]
+        subj_id = os.path.basename(os.path.dirname(subj_t2_dir))
+        print(subj_id)
 
 
         # directory for saving output: out_dir/subj_id/
-        subj_out_dir = out_dir + subj_id + '/'
+        subj_out_dir = out_dir + '/' + subj_id + '/'
         # create output directory
         if not os.path.exists(subj_out_dir):
             os.mkdir(subj_out_dir)
             # add subject id as prefix
-        subj_out_dir = subj_out_dir + subj_id
+        
         
         # initialize logger
         logger = Logging(subj_out_dir)
@@ -157,19 +159,19 @@ if __name__ == '__main__':
         # 归一化 MRI 数据
         vol_in = (vol_t2_orig_down / vol_t2_orig_down.max()).float()
         
-        # ============ original pt ============  
-        # 用深度学习模型预测脑掩码
-        with torch.no_grad():
-            brain_mask_pred = torch.sigmoid(nn_seg_brain(vol_in))
-            brain_mask_pred = F.interpolate(
-                brain_mask_pred, size=vol_t2_orig.shape[2:], mode='trilinear')
-        # threshold to binary mask 转换为二值脑掩码
-        brain_mask_orig = (brain_mask_pred[0,0]>0.5).float().cpu().numpy()
+        # # ============ original pt ============  
+        # # 用深度学习模型预测脑掩码
+        # with torch.no_grad():
+        #     brain_mask_pred = torch.sigmoid(nn_seg_brain(vol_in))
+        #     brain_mask_pred = F.interpolate(
+        #         brain_mask_pred, size=vol_t2_orig.shape[2:], mode='trilinear')
+        # # threshold to binary mask 转换为二值脑掩码
+        # brain_mask_orig = (brain_mask_pred[0,0]>0.5).float().cpu().numpy()
         
-        # save brain mask
-        save_numpy_to_nifti(
-            brain_mask_orig, affine_t2_orig,
-            subj_out_dir+'_brain_mask.nii.gz')
+        # # save brain mask
+        # save_numpy_to_nifti(
+        #     brain_mask_orig, affine_t2_orig,
+        #     subj_out_dir+'_brain_mask.nii.gz')
 
         # ============ train pt ============  
         # 用深度学习模型预测脑掩码
@@ -183,7 +185,7 @@ if __name__ == '__main__':
         # save brain mask
         save_numpy_to_nifti(
             brain_mask_orig_train, affine_t2_orig,
-            subj_out_dir+'_brain_mask_train.nii.gz')    
+            subj_out_dir+'brain_mask_train_10.nii.gz')    
         
         t_brain_end = time.time()
         t_brain = t_brain_end - t_brain_start
