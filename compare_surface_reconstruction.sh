@@ -1,0 +1,11 @@
+python3 compare_surface_reconstruction.py --in_dir='/root/autodl-tmp/hcp_gcn/datasets_test/' \
+                       --out_dir='/root/autodl-tmp/hcp_gcn/datasets_for_surface_resconstruction_testing/' \
+                       --restore_suffix='_desc_T2w_restore_brain.nii.gz' \
+                       --nn_surf_left_wm_path='./surface/model/model_hemi-left_wm.pt' \
+                       --nn_surf_right_wm_path='./model_trained_by_10/model_hemi-right_wm-20-mse.pt' \
+                       --nn_surf_left_pial_path='./model_trained_by_50/model_hemi-left_pial-50-cd-nc-edge.pt' \
+                       --nn_surf_right_pial_path='./surface/model/model_hemi-right_pial.pt' \
+                       --hemi='left' \
+                       --surface='pial' \
+                       --save_suffix='_pial_50-cd-nc-edge-50.surf.gii'\
+                       --device='cuda:0'
