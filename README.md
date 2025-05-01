@@ -1,4 +1,4 @@
-# hcp_gcn
+# hcp_1200
 
 ## 数据集说明
 + datasets_dhcp_cut2: 2组T2w原始数据
@@ -117,4 +117,4 @@ def remesh_template_surfaces(template_dir, n_target=200000):
 ```python
 wb_generate_inflated_surfaces('/root/dhcp/hcp_template/lh.white.surf.gii')
 ```
-# hcp1200
+
