@@ -185,7 +185,7 @@ if __name__ == '__main__':
         # save brain mask
         save_numpy_to_nifti(
             brain_mask_orig_train, affine_t2_orig,
-            subj_out_dir+'brain_mask_train_10.nii.gz')    
+            subj_out_dir+'brain_mask_train_all.nii.gz')    
         
         t_brain_end = time.time()
         t_brain = t_brain_end - t_brain_start
