@@ -52,7 +52,7 @@ def split_data(orig_dir, save_dir, seed=12345):
                 
                 
                 
-def remesh(vert, face, n_target=160000):
+def remesh(vert, face, n_target = 160000):
     # compute target edge length
     edge = np.concatenate([
         face[:,[0,1]], face[:,[1,2]], face[:,[2,0]]], axis=0).T
@@ -65,7 +65,7 @@ def remesh(vert, face, n_target=160000):
     ms.add_mesh(m)
     ms.meshing_isotropic_explicit_remeshing(
         iterations=5, adaptive=False, checksurfdist=False,
-        targetlen=pymeshlab.AbsoluteValue(target_len))
+        targetlen=pymeshlab.PureValue(target_len))
 
     vert_remesh = ms[0].vertex_matrix()
     face_remesh = ms[0].face_matrix()
@@ -82,7 +82,7 @@ def process_data(orig_dir, save_dir):
         '/root/autodl-tmp/hcp1200/template_hcp1200/MNI152_T1_0.7mm_brain_sampled.nii.gz')
     affine_fix = nib.load(
         '/root/autodl-tmp/hcp1200/template_hcp1200/MNI152_T1_0.7mm_brain_sampled.nii.gz').affine
-    
+    img_fix = img_fix_ants
     min_regist_dice = 0.94
     logger = Logging(save_dir+'creat_dataset')
 
@@ -106,7 +106,7 @@ def process_data(orig_dir, save_dir):
             img_orig_nib_t1 = nib.load(subj_orig_dir+'T1w.nii.gz')
             affine_orig_t1 = img_orig_nib_t1.affine
 
-            # # t2 image after bias correction
+            # t2 image after bias correction
             img_restore_nib_t2 = nib.load(subj_orig_dir+'T2w.nii.gz')
             
             # t1 image after bias correction
@@ -115,12 +115,15 @@ def process_data(orig_dir, save_dir):
             # brainmask by bet
             brain_mask_nib = nib.load(subj_orig_dir+'brainmask_fs.nii.gz')
             
-            img_orig = img_orig_nib.get_fdata()
-            img_restore = img_restore_nib.get_fdata()
+            img_orig_t1 = img_orig_nib_t1.get_fdata()
+            img_restore_t1 = img_restore_nib_t1.get_fdata()
+            img_orig_t2 = img_orig_nib_t2.get_fdata()
+            img_restore_t2 = img_restore_nib_t2.get_fdata()
             brain_mask = brain_mask_nib.get_fdata()
             
             # brain-extracted bias-corrected brain MRI
-            img_proc = img_restore * brain_mask
+            img_proc_t1 = img_restore_t1 * brain_mask
+            img_proc_t2 = img_restore_t2 * brain_mask
             
             # # load tissue label
             # tissue_label_nib = nib.load(subj_orig_dir+'_desc-drawem9_dseg.nii.gz')
@@ -130,7 +133,7 @@ def process_data(orig_dir, save_dir):
             # ------ for segmentation ------
             # save original brain mask
             save_numpy_to_nifti(
-                brain_mask.astype(np.float32), affine_orig,
+                brain_mask.astype(np.float32), affine_orig_t2,
                 subj_save_dir+'brain_mask.nii.gz')
             
             # # save original cortical ribbon
@@ -139,106 +142,107 @@ def process_data(orig_dir, save_dir):
             #     subj_save_dir+'_ribbon.nii.gz')
             
             # ------ downsample image ------
-            # # downsample data
-            # img_orig_t = torch.Tensor(img_orig[None,None])
-            # img_orig_down_t = F.interpolate(
-            #     img_orig_t, size=[160,208,208], mode='trilinear')
-            # img_orig_down = img_orig_down_t[0,0].numpy()
-            # img_proc_t = torch.Tensor(img_proc[None,None])
-            # img_proc_down_t = F.interpolate(
-            #     img_proc_t, size=[160,208,208], mode='trilinear')
-            # img_proc_down = img_proc_down_t[0,0].numpy()
+            # downsample data T1
+            img_orig_t_t1 = torch.Tensor(img_orig_t1[None,None])
+            img_orig_down_t_t1 = F.interpolate(
+                img_orig_t_t1, size=[160,208,208], mode='trilinear')
+            img_orig_down_t1 = img_orig_down_t_t1[0,0].numpy()
+            img_proc_t_t1 = torch.Tensor(img_proc_t1[None,None])
+            img_proc_down_t_t1 = F.interpolate(
+                img_proc_t_t1, size=[160,208,208], mode='trilinear')
+            img_proc_down_t1 = img_proc_down_t_t1[0,0].numpy()
             
-            # downsample data
-            img_orig_t = torch.Tensor(img_orig[None,None])
-            img_orig_down_t = F.interpolate(
-                img_orig_t, size=[256,304,256], mode='trilinear')
-            img_orig_down = img_orig_down_t[0,0].numpy()
-            img_proc_t = torch.Tensor(img_proc[None,None])
-            img_proc_down_t = F.interpolate(
-                img_proc_t, size=[256,304,256], mode='trilinear')
-            img_proc_down = img_proc_down_t[0,0].numpy()
+            # downsample data T2
+            img_orig_t_t2 = torch.Tensor(img_orig_t2[None,None])
+            img_orig_down_t_t2 = F.interpolate(
+                img_orig_t_t2, size=[256,304,256], mode='trilinear')
+            img_orig_down_t2 = img_orig_down_t_t2[0,0].numpy()
+            img_proc_t_t2 = torch.Tensor(img_proc_t2[None,None])
+            img_proc_down_t_t2 = F.interpolate(
+                img_proc_t_t2, size=[256,304,256], mode='trilinear')
+            img_proc_down_t2 = img_proc_down_t_t2[0,0].numpy()
 
-            # # save downsampled images as training input
-            # save_numpy_to_nifti(
-            #     img_orig_down.astype(np.float32), affine_orig,
-            #     subj_save_dir+'_T2w_orig_down.nii.gz')
-            # save_numpy_to_nifti(
-            #     img_proc_down.astype(np.float32), affine_orig,
-            #     subj_save_dir+'_T2w_proc_down.nii.gz')
-            
-            # save downsampled images as training input
+            # save downsampled images as training input T2
             save_numpy_to_nifti(
-                img_orig_down.astype(np.float32), affine_orig,
+                img_orig_down_t2.astype(np.float32), affine_orig_t2,
+                subj_save_dir+'T2w_orig_down.nii.gz')
+            save_numpy_to_nifti(
+                img_proc_down_t2.astype(np.float32), affine_orig_t2,
+                subj_save_dir+'T2w_proc_down.nii.gz')
+            
+            # save downsampled images as training input T1
+            save_numpy_to_nifti(
+                img_orig_down_t1.astype(np.float32), affine_orig_t1,
                 subj_save_dir+'T1w_orig_down.nii.gz')
             save_numpy_to_nifti(
-                img_proc_down.astype(np.float32), affine_orig,
+                img_proc_down_t1.astype(np.float32), affine_orig_t1,
                 subj_save_dir+'T1w_proc_down.nii.gz')
             
             # ------ affine registration ------
-            # # use restored brain-extracted image
-            # img_move_ants = ants.image_read(
-            #     subj_orig_dir+'_desc-restore_T2w.nii.gz')
-            
-            # img_move_ants = ants.from_numpy(
-            #     img_proc,
-            #     origin=img_move_ants.origin,
-            #     spacing=img_move_ants.spacing,
-            #     direction=img_move_ants.direction)
-            
-            img_move_ants = ants.image_read(
-                subj_orig_dir+'T1w.nii.gz')
-            
-            img_move_ants = ants.from_numpy(
-                img_proc,
-                origin=img_move_ants.origin,
-                spacing=img_move_ants.spacing,
-                direction=img_move_ants.direction)
-            
-            # # ants registration
-            # img_align_ants, affine_align, _, _, align_dice =\
-            # registration(
-            #     img_move_ants, img_fix_ants, affine_fix,
-            #     out_prefix=subj_save_dir)
-            # img_align = img_align_ants.numpy()
 
-            # # check dice score
-            # if align_dice >= min_regist_dice:
-            #     logger.info('Dice after registration: {}'.format(align_dice))
-            # else:
-            #     logger.info('Error! Affine registration failed!')
-            #     logger.info('Expected Dice>{} after registraion, got Dice={}.'.format(
-            #         min_regist_dice, align_dice))
-            # os.remove(subj_save_dir+'_rigid_0GenericAffine.mat')
-            # os.remove(subj_save_dir+'_affine_0GenericAffine.mat')
-
-            # # save affinely aligned brain-extracted restored T2w image 
-            # save_numpy_to_nifti(
-            #     img_align.astype(np.float32), affine_align,
-            #     subj_save_dir+'_T2w_proc_affine.nii.gz')
+            img_move_ants_t1 = ants.image_read(
+                subj_orig_dir + 'T1w.nii.gz')
             
-            # ants registration
-            img_align_ants, affine_align, _, _, align_dice =\
+            img_move_ants_t1 = ants.from_numpy(
+                img_proc_t1,
+                origin = img_move_ants_t1.origin,
+                spacing = img_move_ants_t1.spacing,
+                direction = img_move_ants_t1.direction)
+
+            img_move_ants_t2 = ants.image_read(
+                subj_orig_dir+'T2w.nii.gz')
+            
+            img_move_ants_t2 = ants.from_numpy(
+                img_proc_t2,
+                origin = img_move_ants_t2.origin,
+                spacing = img_move_ants_t2.spacing,
+                direction = img_move_ants_t2.direction)        
+    
+            
+            # ants registration T1
+            img_align_ants_t1, affine_align_t1, _, _, align_dice_t1 =\
             registration(
-                img_move_ants, img_fix_ants, affine_fix,
-                out_prefix=subj_save_dir)
-            img_align = img_align_ants.numpy()
+                img_move_ants_t1, img_fix_ants, affine_fix,
+                out_prefix = subj_save_dir)
+            img_align_t1 = img_align_ants_t1.numpy()
 
             # check dice score
-            if align_dice >= min_regist_dice:
-                logger.info('Dice after registration: {}'.format(align_dice))
+            if align_dice_t1 >= min_regist_dice:
+                logger.info('Dice after registration: {}'.format(align_dice_t1))
             else:
                 logger.info('Error! Affine registration failed!')
                 logger.info('Expected Dice>{} after registraion, got Dice={}.'.format(
-                    min_regist_dice, align_dice))
+                    min_regist_dice, align_dice_t1))
             os.remove(subj_save_dir+'_rigid_0GenericAffine.mat')
             os.remove(subj_save_dir+'_affine_0GenericAffine.mat')
 
             # save affinely aligned brain-extracted restored T1w image 
             save_numpy_to_nifti(
-                img_align.astype(np.float32), affine_align,
+                img_align_t1.astype(np.float32), affine_align_t1,
                 subj_save_dir+'T1w_proc_affine.nii.gz')
             
+            # ants registration T2
+            img_align_ants_t2, affine_align_t2, _, _, align_dice_t2 =\
+            registration(
+                img_move_ants_t2, img_fix_ants, affine_fix,
+                out_prefix = subj_save_dir)
+            img_align_t2 = img_align_ants_t2.numpy()
+
+            # check dice score
+            if align_dice_t2 >= min_regist_dice:
+                logger.info('Dice after registration: {}'.format(align_dice_t2))
+            else:
+                logger.info('Error! Affine registration failed!')
+                logger.info('Expected Dice>{} after registraion, got Dice={}.'.format(
+                    min_regist_dice, align_dice_t2))
+            os.remove(subj_save_dir+'_rigid_0GenericAffine.mat')
+            os.remove(subj_save_dir+'_affine_0GenericAffine.mat')
+
+            # save affinely aligned brain-extracted restored T1w image 
+            save_numpy_to_nifti(
+                img_align_t2.astype(np.float32), affine_align_t2,
+                subj_save_dir+'T2w_proc_affine.nii.gz')
+
             # ------ cortical surface remesh ------
             # copy surfaces
 
@@ -250,10 +254,10 @@ def process_data(orig_dir, save_dir):
                     surf = nib.load(surf_orig_dir)
                     vert = surf.agg_data('pointset')
                     face = surf.agg_data('triangle')
-                    vert_150k, face_150k = remesh(vert, face)
+                    vert_160k, face_160k = remesh(vert, face)
                     save_gifti_surface(
-                        vert_150k, face_150k,
-                        save_dir=surf_save_dir[:-9]+'_150k.surf.gii',
+                        vert_160k, face_160k,
+                        save_dir=surf_save_dir[:-9]+'_160k.surf.gii',
                         surf_hemi='left' if surf_hemi == 'L' else 'right', surf_type='wm' if surf_type == 'white' else 'pial')
 
 # 获取当前文件所在目录
