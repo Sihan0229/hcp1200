@@ -78,18 +78,11 @@ def remesh(vert, face, n_target=160000):
 def process_data(orig_dir, save_dir):
     data_split = ['train', 'valid', 'test']
 
-    # img_fix_ants = ants.image_read(
-    #     './template/dhcp_week-40_template_T2w.nii.gz')
-    # affine_fix = nib.load(
-    #     './template/dhcp_week-40_template_T2w.nii.gz').affine
+    img_fix_ants = ants.image_read(
+        '/root/autodl-tmp/hcp1200/template_hcp1200/MNI152_T1_0.7mm_brain_sampled.nii.gz')
+    affine_fix = nib.load(
+        '/root/autodl-tmp/hcp1200/template_hcp1200/MNI152_T1_0.7mm_brain_sampled.nii.gz').affine
     
-    
-    template_dir = '/root/autodl-tmp/hcp1200/template_hcp1200'
-
-    img_fix_ants = ants.image_read(os.path.join(template_dir, 'MNI152_T1_0.7mm_brain_sampled.nii.gz'))
-    affine_fix = nib.load(os.path.join(template_dir, 'MNI152_T1_0.7mm_brain_sampled.nii.gz')).affine
-    
-    img_fix = img_fix_ants
     min_regist_dice = 0.94
     logger = Logging(save_dir+'creat_dataset')
 
@@ -97,7 +90,6 @@ def process_data(orig_dir, save_dir):
         subj_list = sorted(os.listdir(save_dir+data_split[n]))
         for i in tqdm(range(len(subj_list))):
             subj_name = subj_list[i]
-            # subid, sesid = subj_name.split('_')
             sesid = subj_name
             subj_orig_dir = orig_dir+sesid+'/'
             subj_save_dir = save_dir+data_split[n]+'/'+sesid+'/'
@@ -249,24 +241,11 @@ def process_data(orig_dir, save_dir):
             
             # ------ cortical surface remesh ------
             # copy surfaces
-            # for surf_hemi in ['left', 'right']:
-            #     for surf_type in ['wm', 'pial']:
-            #         surf_orig_dir = subj_orig_dir+'_hemi-'+surf_hemi+'_'+surf_type+'.surf.gii'
-            #         surf_save_dir = subj_save_dir+'_hemi-'+surf_hemi+'_'+surf_type+'.surf.gii'
-            #         # shutil.copy(surf_orig_dir, surf_save_dir)
-            #         surf = nib.load(surf_orig_dir)
-            #         vert = surf.agg_data('pointset')
-            #         face = surf.agg_data('triangle')
-            #         vert_150k, face_150k = remesh(vert, face)
-            #         save_gifti_surface(
-            #             vert_150k, face_150k,
-            #             save_dir=surf_save_dir[:-9]+'_150k.surf.gii',
-            #             surf_hemi=surf_hemi, surf_type=surf_type)
-            
+
             for surf_hemi in ['L', 'R']:
                 for surf_type in ['white', 'pial']:
-                    surf_orig_dir = subj_orig_dir+sesid+'.'+surf_hemi+'.'+surf_type+'.native'+'.surf.gii'
-                    surf_save_dir = subj_save_dir+sesid+'.'+surf_hemi+'.'+surf_type+'.native'+'.surf.gii'
+                    surf_orig_dir = subj_orig_dir + sesid +'.'+surf_hemi+'.'+surf_type+'.native'+'.surf.gii'
+                    surf_save_dir = subj_save_dir + sesid +'.'+surf_hemi+'.'+surf_type+'.native'+'.surf.gii'
                     # shutil.copy(surf_orig_dir, surf_save_dir)
                     surf = nib.load(surf_orig_dir)
                     vert = surf.agg_data('pointset')
@@ -284,8 +263,8 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Data Proprocessing")
 
-    parser.add_argument('--orig_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200/', type=str, help="directory of original dHCP dataset")
-    parser.add_argument('--save_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_split/', type=str, help="directory for saving processed data")
+    parser.add_argument('--orig_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_cut/', type=str, help="directory of original dHCP dataset")
+    parser.add_argument('--save_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_cut_split/', type=str, help="directory for saving processed data")
     
     args = parser.parse_args()
     orig_dir = args.orig_dir
