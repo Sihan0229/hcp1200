@@ -118,3 +118,7 @@ def remesh_template_surfaces(template_dir, n_target=200000):
 wb_generate_inflated_surfaces('/root/dhcp/hcp_template/lh.white.surf.gii')
 ```
 
+运行代码
+```bash
+nohup python3 train_seg_brain.py > train_seg_brain.log 2>&1 &
+```
