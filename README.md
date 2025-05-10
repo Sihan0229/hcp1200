@@ -8,14 +8,14 @@
 ## 结果文件说明
 - [x] hcp1200/result_train_model/model_seg_brain_10.pt: 由10组数据训练得到的mask提取模型
 - [x] hcp1200/result_train_model/model_seg_brain_all.pt: 由全部数据训练得到的mask提取模型
-- [] hcp1200/result_train_model/model_left_wm_10.pt: 由10组数据训练得到的left_wm提取模型
-- [] hcp1200/result_train_model/model_left_wm_all.pt: 由全部数据训练得到的left_wm提取模型
-- [] hcp1200/result_train_model/model_right_wm_10.pt: 由10组数据训练得到的right_wm提取模型
-- [] hcp1200/result_train_model/model_right_wm_all.pt: 由全部数据训练得到的right_wm提取模型
-- [] hcp1200/result_train_model/model_left_pial_10.pt: 由10组数据训练得到的left_pial提取模型
-- [] hcp1200/result_train_model/model_left_pial_all.pt: 由全部数据训练得到的left_pial提取模型
-- [] hcp1200/result_train_model/model_right_pial_10.pt: 由10组数据训练得到的right_pial提取模型
-- [] hcp1200/result_train_model/model_right_pial_all.pt: 由全部数据训练得到的right_pial提取模型
+- [ ] hcp1200/result_train_model/model_left_wm_10.pt: 由10组数据训练得到的left_wm提取模型
+- [ ] hcp1200/result_train_model/model_left_wm_all.pt: 由全部数据训练得到的left_wm提取模型
+- [ ] hcp1200/result_train_model/model_right_wm_10.pt: 由10组数据训练得到的right_wm提取模型
+- [ ] hcp1200/result_train_model/model_right_wm_all.pt: 由全部数据训练得到的right_wm提取模型
+- [ ] hcp1200/result_train_model/model_left_pial_10.pt: 由10组数据训练得到的left_pial提取模型
+- [ ] hcp1200/result_train_model/model_left_pial_all.pt: 由全部数据训练得到的left_pial提取模型
+- [ ] hcp1200/result_train_model/model_right_pial_10.pt: 由10组数据训练得到的right_pial提取模型
+- [ ] hcp1200/result_train_model/model_right_pial_all.pt: 由全部数据训练得到的right_pial提取模型
 - [x] hcp1200/model_trained_by_50: dhcp50组数据得到的mask、wm、pial模型
 
 ## py与sh文件说明
