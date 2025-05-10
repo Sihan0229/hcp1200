@@ -1,44 +1,59 @@
 # hcp_1200
 
 ## 数据集说明
-+ datasets_dhcp_cut2: 2组T2w原始数据
-+ datasets_dhcp_cut50: 50组T2w原始数据
-+ datasets for surface resconstruction testing: 2组经过预处理的vol、wm、pial数据，用于皮层重建测试
-+ datasets for surface_resconstruction training: 50组经过预处理的vol、wm、pial数据，用于皮层重建训练
-+ datasets test:  2组dHCP原始数据，包括T2w和各阶段的Ground Truth
-+ datasets train:  50组dHCP原始数据，包括T2w和各阶段的Ground Truth
+
+[ ] hcp1200_dataset/HCP1200: HCP原始数据，包括T1w、T2w、mask、rh与lh的wm与pial
+[ ] hcp1200_dataset/HCP1200_cut: HCP原始数据10组cut
+[ ] hcp1200_dataset/HCP1200_cut_split: 经过预处理的HCP原始数据10组cut
 
 ## 结果文件说明
-+ model_trained by_10: 由10组数据训练得到的模型
-+ model_trained by_50: 由50组数据训练得到的模型 
-+ results_by_my_model: 由本项目模型处理的结果
 
-## py与sh文件说明
-+ compare_brain_extraction.py: ROI提取测试对比
-+ compare_brain_extraction.sh: ROI提取测试对比
-+ compare_ribbon_seg.py: 皮层带分割测试对比（未完成）
-+ compare_surface_reconstruction_simple.py: 皮层重建（简化版）损失函数为MSE
-+ compare surface reconstruction.py: 皮层重建对比（改进版）损失函数为cd nc edge
-+ compare surface reconstruction.sh: 皮层重建对比（改进版）损失函数为cd nc edge
+[ ] hcp1200/result_train_model/model_seg_brain_10.pt: 由10组数据训练得到的mask提取模型
+[ ] hcp1200/result_train_model/model_seg_brain_all.pt: 由全部数据训练得到的mask提取模型
+[ ] hcp1200/model_trained_by_50: dhcp50组数据得到的mask、wm、pialmo'x
 
-+ train_seg_brain.py: ROI提取模型训练
-+ train_surface_reconstruction_simple.py: 皮层重建（MSE）模型训练
-+ train_surface_reconstruction_simple.sh: 皮层重建（MSE）模型训练
-+ train_surface_reconstruction_wm.py: 皮层白质重建（Loss改进）模型训练
-+ train_surface_reconstruction_wm.sh: 皮层白质重建（Loss改进）模型训练
-+ train_surface_reconstruction_pial.py: 皮层软脑膜重建（Loss改进）模型训练
-+ train_surface_reconstruction_pial.sh: 皮层软脑膜重建（Loss改进）模型训练
+## 训练代码文件说明
+[ ] compare_brain_extraction.py: ROI提取测试对比
 
-+ train.sh: 完整训练流程（未完成）
-+ train_pipeline.py: 完整训练流程（未完成）
-+ mesh_check.py: 重建表面格式正确性检验
-+ mesh reduce.py: 表面降采样
-+ T12w_others_rename.py: restore等文件重命名
+[ ] compare_brain_extraction.sh: ROI提取测试对比
 
-+ install.sh: 环境配置
-+ run_pipeline.py: 原始测试管道
-+ run.sh: 原始测试管道
+[ ] compare_ribbon_seg.py: 皮层带分割测试对比（未完成）
 
+[ ] compare_surface_reconstruction_simple.py: 皮层重建（简化版）损失函数为MSE
+
+[ ] compare surface reconstruction.py: 皮层重建对比（改进版）损失函数为cd nc edge
+
+[ ] compare surface reconstruction.sh: 皮层重建对比（改进版）损失函数为cd nc edge
+
+[x] train_seg_brain.py: ROI提取模型训练（HCP已完成）
+
+[ ] train_surface_reconstruction_simple.py: 皮层重建（MSE）模型训练（HCP未完成）
+
+[ ] train_surface_reconstruction_simple.sh: 皮层重建（MSE）模型训练（HCP未完成）
+
+[ ] train_surface_reconstruction_wm.py: 皮层白质重建（Loss改进）模型训练（HCP未完成）
+
+[ ] train_surface_reconstruction_wm.sh: 皮层白质重建（Loss改进）模型训练（HCP未完成）
+
+[ ] train_surface_reconstruction_pial.py: 皮层软脑膜重建（Loss改进）模型训练（HCP未完成）
+
+[ ] train_surface_reconstruction_pial.sh: 皮层软脑膜重建（Loss改进）模型训练（HCP未完成）
+
+[ ] train.sh: 完整训练流程（未完成）
+
+[ ] train_pipeline.py: 完整训练流程（未完成）
+
+[ ] mesh_check.py: 重建表面格式正确性检验，统计表面顶点数量
+
+[ ] mesh reduce.py: 表面降采样
+
+[ ] T12w_others_rename.py: restore等文件重命名
+
+[ ] install.sh: 环境配置
+
+[ ] run_pipeline.py: 原始测试管道
+
+[ ] run.sh: 原始测试管道
 
 对比HCP1200和dhcp的template
 
