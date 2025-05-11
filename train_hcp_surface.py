@@ -1,7 +1,7 @@
 import sys
 import os
-os.chdir('..')
-sys.path.append(os.getcwd())
+# os.chdir('..')
+# sys.path.append(os.getcwd())
 
 import numpy as np
 from tqdm import tqdm
@@ -25,121 +25,6 @@ from utils.mesh import (
     adjacent_faces,
     taubin_smooth,
     face_normal)
-
-
-# class SurfDataset(Dataset):
-#     """
-#     Dataset class for surface reconstruction
-#     """
-#     def __init__(self, args, data_split='train'):
-#         super(SurfDataset, self).__init__()
-        
-#         # ------ load arguments ------ 
-#         surf_hemi = args.surf_hemi
-#         surf_type = args.surf_type
-#         device = args.device
-#         tag = args.tag
-#         sigma = args.sigma
-
-#         # subj_list = sorted(glob.glob('./data/'+data_split+'/sub-*'))
-#         subj_list = sorted(glob.glob('/root/autodl-tmp/input/'+data_split+'/*'))
-
-#         # ------ load template input ------ 
-#         # img_temp = nib.load(
-#         #     './template/dhcp_week-40_template_T2w.nii.gz')
-#         # surf_temp = nib.load(
-#         #     './template/dhcp_week-40_hemi-'+surf_hemi+'_init.surf.gii')
-
-#         file_dir = os.path.dirname(os.path.abspath(__file__))
-#         template_dir = os.path.join(file_dir, '../../template/')
-
-#         img_temp = nib.load(
-#             template_dir + 'MNI152_T1_0.7mm_brain.nii.gz')
-        
-#         surf_temp = nib.load(
-#             template_dir + 
-#             ('lh.' if surf_hemi == 'left' else 'rh.') + 
-#             ('white' if surf_type == 'wm' else 'pial') + 
-#             '.surf.gii'
-#         )
-        
-#         affine_temp = img_temp.affine
-#         vert_temp = surf_temp.agg_data('pointset')
-#         face_temp = surf_temp.agg_data('triangle')
-#         vert_temp = apply_affine_mat(
-#             vert_temp, np.linalg.inv(affine_temp))
-#         face_temp = face_temp[:,[2,1,0]]
-        
-#         # ------ load pre-trained model ------
-#         if surf_type == 'pial':
-#             nn_surf = SurfDeform(
-#                 C_hid=[8,16,32,64,128,128], C_in=1,
-#                 inshape=[160,304,256], sigma=sigma, device=device) # TODO
-#             model_dir = './surface/model/model_hemi-'+surf_hemi+'_wm.pt'
-#             nn_surf.load_state_dict(
-#                 torch.load(model_dir, map_location=device))
-#         self.data_list = []
-        
-#         for i in tqdm(range(len(subj_list))):
-#             subj_dir = subj_list[i]
-#             subj_id = subj_list[i].split('/')[-1]
-            
-#             # ------ load input volume ------
-#             # vol_in = nib.load(
-#             #     subj_dir+'/'+subj_id+'_T2w_proc_affine.nii.gz')
-#             vol_in = nib.load(
-#                 subj_dir+'/'+'T1w_proc_affine.nii.gz')
-#             affine_in = vol_in.affine
-#             vol_in = vol_in.get_fdata()
-#             vol_in = (vol_in / vol_in.max()).astype(np.float32)
-
-#             # clip left/right hemisphere
-#             # if surf_hemi == 'left':
-#             #     vol_in = vol_in[None, 64:]
-#             # elif surf_hemi == 'right':
-#             #     vol_in = vol_in[None, :112]
-#             if surf_hemi == 'left':
-#                 vol_in = vol_in[None, 96:]
-#             elif surf_hemi == 'right':
-#                 vol_in = vol_in[None, :160]
-                
-#             # ------ load input surface ------
-#             # use init suface as input for wm surface recon
-#             vert_in = vert_temp.copy().astype(np.float32)
-#             face_in = face_temp.copy()
-#             if surf_hemi == 'left':
-#                 vert_in[:,0] = vert_in[:,0] - 96
-#             # for pial surface, use predicted wm surface
-#             if surf_type == 'pial':
-#                 vert_in = torch.Tensor(vert_in[None]).to(device)
-#                 face_in = torch.LongTensor(face_in[None]).to(device)
-#                 vol_in = torch.Tensor(vol_in[None]).to(device)
-#                 with torch.no_grad():
-#                     vert_in = nn_surf(vert_in, vol_in, n_steps=7)
-#                     vert_in = taubin_smooth(vert_in, face_in, n_iters=5)
-#                 vert_in = vert_in[0].cpu().numpy()
-#                 face_in = face_in[0].cpu().numpy()
-#                 vol_in = vol_in[0].cpu().numpy()
-
-#             # ------ load gt surface ------
-#             surf_gt = nib.load(
-#                 subj_dir+'/'+subj_id+'.'+('L' if surf_hemi == 'left' else 'R') +'.'+('white' if surf_type == 'wm' else 'pial')+'.native_150k.surf.gii')
-#             vert_gt = surf_gt.agg_data('pointset')
-#             face_gt = surf_gt.agg_data('triangle')
-#             vert_gt = apply_affine_mat(
-#                 vert_gt, np.linalg.inv(affine_in)).astype(np.float32)
-#             face_gt = face_gt[:,[2,1,0]]
-#             if surf_hemi == 'left':
-#                 vert_gt[:,0] = vert_gt[:,0] - 96
-#             surf_data = (vol_in, vert_in, vert_gt, face_in, face_gt)
-#             self.data_list.append(surf_data)  # add to data list
-
-#     def __len__(self):
-#         return len(self.data_list)
-
-#     def __getitem__(self, i):
-#         surf_data = self.data_list[i]
-#         return surf_data
 
 class SurfDataset(Dataset):
     """
@@ -276,11 +161,17 @@ def train_loop(args):
     w_edge = args.w_edge  # weight for edge loss
     
     # start training logging
-    logging.basicConfig(
-        filename='/root/autodl-tmp/hcp1200/surface/ckpts/log_hemi-'+surf_hemi+'_'+\
-        surf_type+'_'+tag+'.log', level=logging.INFO,
-        format='%(asctime)s %(message)s')
+    # logging.basicConfig(
+    #     filename='/root/autodl-tmp/hcp1200/surface/ckpts/log_hemi-'+surf_hemi+'_'+\
+    #     surf_type+'_'+tag+'.log', level=logging.INFO,
+    #     format='%(asctime)s %(message)s')
     
+    logging.basicConfig( 
+    filename='/root/autodl-tmp/hcp1200/surface/ckpts/log_hemi-' + surf_hemi + '_' + 
+             surf_type + '_' + tag + '.log',
+    level=logging.INFO,
+    format='%(asctime)s %(message)s')
+
     # ------ load dataset ------ 
     logging.info("load dataset ...")
     trainset = SurfDataset(args, data_split='train')
@@ -293,12 +184,6 @@ def train_loop(args):
     file_dir = os.path.dirname(os.path.abspath(__file__))
     template_dir = os.path.join(file_dir, '/root/autodl-tmp/hcp1200/template_hcp1200/')
     
-    # surf_temp = nib.load(
-    #     os.path.join(template_dir, 
-    #     "S1200."
-    #     f"{'L' if surf_hemi == 'left' else 'R'}."
-    #     "inflated_MSMAll.32k_fs_LR_150k.surf.gii")
-    # )
     surf_temp = nib.load(
         os.path.join(template_dir, 
         f"{'lh' if surf_hemi == 'left' else 'rh'}."
@@ -407,8 +292,8 @@ if __name__ == "__main__":
     parser.add_argument('--lr', default=1e-4 , type=float, help="learning rate") # TODO # 更小的学习率适应复杂结构
     parser.add_argument('--n_epoch', default=300, type=int, help="number of training epochs") # TODO # 延长训练周期
     parser.add_argument('--sigma', default=0.7, type=float, help="standard deviation for gaussian smooth") # TODO # 减少平滑以保留颞叶、顶叶等区域的细微褶皱
-    parser.add_argument('--w_nc', default=0.0, type=float, help="weight for normal consistency loss") # TODO # 降低对平滑的强约束
-    parser.add_argument('--w_edge', default=1.0, type=float, help="weight for edge length loss") # TODO # 增强边缘保持（成人皮质更薄）
+    parser.add_argument('--w_nc', default=3.0, type=float, help="weight for normal consistency loss") # TODO # 降低对平滑的强约束
+    parser.add_argument('--w_edge', default=0.3, type=float, help="weight for edge length loss") # TODO # 增强边缘保持（成人皮质更薄）
     
     args = parser.parse_args()
     
