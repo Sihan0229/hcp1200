@@ -145,11 +145,11 @@ def process_data(orig_dir, save_dir):
             # downsample data T1
             img_orig_t_t1 = torch.Tensor(img_orig_t1[None,None])
             img_orig_down_t_t1 = F.interpolate(
-                img_orig_t_t1, size=[160,208,208], mode='trilinear')
+                img_orig_t_t1, size=[256,304,256], mode='trilinear')
             img_orig_down_t1 = img_orig_down_t_t1[0,0].numpy()
             img_proc_t_t1 = torch.Tensor(img_proc_t1[None,None])
             img_proc_down_t_t1 = F.interpolate(
-                img_proc_t_t1, size=[160,208,208], mode='trilinear')
+                img_proc_t_t1, size=[256,304,256], mode='trilinear')
             img_proc_down_t1 = img_proc_down_t_t1[0,0].numpy()
             
             # downsample data T2
@@ -267,8 +267,8 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Data Proprocessing")
 
-    parser.add_argument('--orig_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_cut/', type=str, help="directory of original dHCP dataset")
-    parser.add_argument('--save_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_cut_split/', type=str, help="directory for saving processed data")
+    parser.add_argument('--orig_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200/', type=str, help="directory of original dHCP dataset")
+    parser.add_argument('--save_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_split/', type=str, help="directory for saving processed data")
     
     args = parser.parse_args()
     orig_dir = args.orig_dir

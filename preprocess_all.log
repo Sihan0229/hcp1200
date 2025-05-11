@@ -1,0 +1,13 @@
+nohup: ignoring input
+Warning:
+Unable to load the following plugins:
+
+	libio_e57.so: libio_e57.so does not seem to be a Qt Plugin.
+
+Cannot load library /root/miniconda3/envs/dhcp/lib/python3.10/site-packages/pymeshlab/lib/plugins/libio_e57.so: (/usr/lib/x86_64-linux-gnu/libp11-kit.so.0: undefined symbol: ffi_type_pointer, version LIBFFI_BASE_7.0)
+
+Number of all data: 942
+Number of training data: 565
+Number of validation data: 94
+Number of testing data: 283
+  0%|          | 0/565 [00:00<?, ?it/s]
