@@ -1,2 +1,0 @@
-训练集的restore：vol_t2_align: torch.Size([1, 1, 176, 224, 160])
-原文生成restore：vol_t2_align: torch.Size([1, 1, 176, 224, 160])

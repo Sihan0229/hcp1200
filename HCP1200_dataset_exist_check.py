@@ -1,5 +1,8 @@
 import os
 
+'''
+用于筛出942个HCP数据集当中有问题的2个
+'''
 # 数据集路径
 hcp_root = '/root/autodl-tmp/hcp1200_dataset/HCP1200'
 

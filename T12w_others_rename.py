@@ -1,6 +1,8 @@
 import os
 
-# 用来把影响T2w读取的文件改名
+'''
+用来把影响T2w读取的文件改名
+'''
 
 # 要处理的根目录
 root_dir = "/root/autodl-tmp/hcp_gcn/datasets_test"
