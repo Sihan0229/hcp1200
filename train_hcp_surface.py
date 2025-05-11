@@ -252,6 +252,8 @@ def train_loop(args):
             logging.info('------------ validation ------------')
             with torch.no_grad():
                 recon_error = []
+                nc_error = []
+                edge_error = []
                 for idx, data in enumerate(validloader):
                     vol_in, vert_in, vert_gt, face_in, face_gt = data
                     vol_in = vol_in.to(device).float()
@@ -264,13 +266,27 @@ def train_loop(args):
                     recon_loss = chamfer_distance(vert_pred, vert_gt)[0]
                     recon_error.append(recon_loss.item())
 
+
+                    normal = face_normal(vert_pred, face_in)  # face normal
+                    nc_loss = (1 - normal[:,adj_faces].prod(-2).sum(-1)).mean()
+                    nc_error.append(nc_loss.item())
+
+                    # edge loss
+                    vert_i = vert_pred[:,edge_in[0]]
+                    vert_j = vert_pred[:,edge_in[1]]
+                    edge_loss = ((vert_i - vert_j)**2).sum(-1).mean() 
+                    edge_error.append(edge_loss.item())
+
             logging.info('epoch:{}'.format(epoch))
             logging.info('recon error:{}'.format(np.mean(recon_error)))
+            logging.info('nc error:{}'.format(np.mean(nc_error)))
+            logging.info('edge error:{}'.format(np.mean(edge_error)))
+
             logging.info('-------------------------------------')
         
             # save model checkpoints
             torch.save(nn_surf.state_dict(),
-                       '/root/autodl-tmp/hcp1200/surface/ckpts/model_hemi-'+surf_hemi+'_'+\
+                       '/root/autodl-tmp/hcp1200/surface/ckpts_all/model_hemi-'+surf_hemi+'_'+\
                        surf_type+'_'+tag+'_'+str(epoch)+'epochs.pt')
 
 
