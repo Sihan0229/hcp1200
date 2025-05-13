@@ -24,7 +24,13 @@ from utils.mesh import (
     apply_affine_mat,
     adjacent_faces,
     taubin_smooth,
-    face_normal)
+    face_normal,
+    compute_mean_curvature)
+
+# def compute_mean_curvature(verts, faces):
+#     mesh = trimesh.Trimesh(vertices=verts, faces=faces, process=False)
+#     curvature = trimesh.curvature.discrete_mean_curvature_measure(mesh, mesh.vertices, radius=1.5)
+#     return curvature.astype('float32')
 
 class SurfDataset(Dataset):
     """
@@ -40,7 +46,7 @@ class SurfDataset(Dataset):
         self.sigma = args.sigma
 
         # ------ 获取数据路径列表 ------
-        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/{data_split}/*'))
+        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_cut_split/{data_split}/*'))
         
         # ------ 加载模板数据 ------
         file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -79,36 +85,12 @@ class SurfDataset(Dataset):
     def __len__(self):
         return len(self.subj_dirs)
 
+
+
     def __getitem__(self, idx):
         subj_dir = self.subj_dirs[idx]
         subj_id = os.path.basename(subj_dir)
         
-        # # ------ 惰性加载体积数据 ------
-        # vol_in = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
-        # affine_in = vol_in.affine
-        # vol_data = vol_in.get_fdata()
-        # vol_data = (vol_data / vol_data.max()).astype(np.float32)  # 原始数据 [H,W,D]
-        
-        # # ------ 执行插值 ------
-        # vol_data = torch.from_numpy(vol_data / vol_data.max()).float().unsqueeze(0)  # [1,H,W,D]
-        # vol_data = F.interpolate(
-        #     vol_data.unsqueeze(0),  # [1,1,H,W,D]
-        #     size=[256, 304, 256],
-        #     mode='trilinear'
-        # ).squeeze(0).squeeze(0).numpy()  # [256,304,256]
-
-        # # ------ 将插值结果保存回vol_in ------
-        # vol_in = nib.Nifti1Image(
-        #     vol_data,  # 插值后的数据
-        #     affine_in,  # 保持原始affine矩阵 # TODO
-        #     header=vol_in.header  # 复制原始header
-        # )
-
-        # # 裁剪半球
-        # if self.surf_hemi == 'left':
-        #     vol_data = vol_data[None, 96:]
-        # elif self.surf_hemi == 'right':
-        #     vol_data = vol_data[None, :160]
         
         # ------ 惰性加载体积数据（T2w + T1w）------
         t2_img = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
@@ -168,7 +150,15 @@ class SurfDataset(Dataset):
         if self.surf_hemi == 'left':
             vert_gt[:, 0] -= 96
             
-        return (vol_data, vert_in, vert_gt, face_in, face_gt)
+        
+        v = vert_gt
+        f = face_gt
+        print('vert_gt.shape:', vert_gt.shape)
+        print('face_gt.shape:', face_gt.shape)
+        curv_gt = compute_mean_curvature(v, f)  # shape: (N,)
+        curv_gt = torch.from_numpy(curv_gt).unsqueeze(0)  # shape: (1, N)
+        return (vol_data, vert_in, vert_gt, face_in, face_gt, curv_gt)
+
     
 def train_loop(args):
     # ------ load arguments ------ 
@@ -181,15 +171,11 @@ def train_loop(args):
     sigma = args.sigma  # std for gaussian filter
     w_nc = args.w_nc  # weight for nc loss
     w_edge = args.w_edge  # weight for edge loss
+    w_curv = args.w_curv
     
-    # start training logging
-    # logging.basicConfig(
-    #     filename='/root/autodl-tmp/hcp1200/surface/ckpts/log_hemi-'+surf_hemi+'_'+\
-    #     surf_type+'_'+tag+'.log', level=logging.INFO,
-    #     format='%(asctime)s %(message)s')
-    
+  
     logging.basicConfig( 
-    filename='/root/autodl-tmp/hcp1200/surface/ckpts_all_multi/log_hemi-' + surf_hemi + '_' + 
+    filename='/root/autodl-tmp/hcp1200/surface/ckpts_10_multi_curve/log_hemi-' + surf_hemi + '_' + 
              surf_type + '_' + tag + '.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s')
@@ -243,12 +229,14 @@ def train_loop(args):
     for epoch in tqdm(range(n_epoch+1)):
         avg_loss = []
         for idx, data in enumerate(trainloader):
-            vol_in, vert_in, vert_gt, face_in, face_gt = data
+            vol_in, vert_in, vert_gt, face_in, face_gt, curv_gt = data
             vol_in = vol_in.to(device).float()
             vert_in = vert_in.to(device).float()
             face_in = face_in.to(device).long()
             vert_gt = vert_gt.to(device).float()
             face_gt = face_gt.to(device).long()
+            curv_gt = curv_gt.to(device).float()
+
             optimizer.zero_grad()
             vert_pred = nn_surf(vert_in, vol_in, n_steps=7) # TODO
 
@@ -261,7 +249,19 @@ def train_loop(args):
             edge_loss = ((vert_i - vert_j)**2).sum(-1).mean() 
             # reconstruction loss
             recon_loss = chamfer_distance(vert_pred, vert_gt)[0]
-            loss = recon_loss + w_nc*nc_loss + w_edge*edge_loss
+
+            # ---------- 新增曲率惩罚项 ----------
+            # 使用 Trimesh 计算预测表面的曲率
+            with torch.no_grad():
+                v_pred = vert_pred[0].detach().cpu().numpy()
+                f = face_in[0].cpu().numpy()
+                curv_pred_np = compute_mean_curvature(v_pred, f)
+                curv_pred = torch.from_numpy(curv_pred_np).unsqueeze(0).to(device)
+
+            # 曲率损失（L1）
+            curv_loss = F.l1_loss(curv_pred, curv_gt)
+
+            loss = recon_loss + w_nc*nc_loss + w_edge*edge_loss + w_curv * curv_loss
 
             avg_loss.append(loss.item())
             loss.backward()
@@ -299,16 +299,30 @@ def train_loop(args):
                     edge_loss = ((vert_i - vert_j)**2).sum(-1).mean() 
                     edge_error.append(edge_loss.item())
 
+                    # ---------- 新增曲率惩罚项 ----------
+                    # 使用 Trimesh 计算预测表面的曲率
+                    with torch.no_grad():
+                        v_pred = vert_pred[0].detach().cpu().numpy()
+                        f = face_in[0].cpu().numpy()
+                        curv_pred_np = compute_mean_curvature(v_pred, f)
+                        curv_pred = torch.from_numpy(curv_pred_np).unsqueeze(0).to(device)
+
+                    # 曲率损失（L1）
+                    curv_loss = F.l1_loss(curv_pred, curv_gt)
+                    curv_error.append(curv_loss.item())
+
             logging.info('epoch:{}'.format(epoch))
             logging.info('recon error:{}'.format(np.mean(recon_error)))
             logging.info('nc error:{}'.format(np.mean(nc_error)))
             logging.info('edge error:{}'.format(np.mean(edge_error)))
+            logging.info('curv error:{}'.format(np.mean(curv_error)))
+
 
             logging.info('-------------------------------------')
         
             # save model checkpoints
             torch.save(nn_surf.state_dict(),
-                       '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi/model_hemi-'+surf_hemi+'_'+\
+                       '/root/autodl-tmp/hcp1200/surface/ckpts_10_multi_curve/model_hemi-'+surf_hemi+'_'+\
                        surf_type+'_'+tag+'_'+str(epoch)+'epochs.pt')
 
 
@@ -332,6 +346,7 @@ if __name__ == "__main__":
     parser.add_argument('--sigma', default=0.7, type=float, help="standard deviation for gaussian smooth") # TODO # 减少平滑以保留颞叶、顶叶等区域的细微褶皱
     parser.add_argument('--w_nc', default=3.0, type=float, help="weight for normal consistency loss") # TODO # 降低对平滑的强约束
     parser.add_argument('--w_edge', default=0.3, type=float, help="weight for edge length loss") # TODO # 增强边缘保持（成人皮质更薄）
+    parser.add_argument('--w_curv', default=0.3, type=float,  help='Weight for curvature loss')
     
     args = parser.parse_args()
     

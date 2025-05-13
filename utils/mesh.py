@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from scipy.sparse import coo_matrix
-
+import trimesh
 
 def apply_affine_mat(vert, affine):
     """
@@ -416,3 +416,10 @@ def area_weighted_smooth(vert, face, strength=1., n_iters=1):
         vert_avg = A.bmm((f_center * f_area)) / A.bmm(f_area)
         vert = (1-strength)*vert + strength*vert_avg
     return vert
+
+
+
+def compute_mean_curvature(verts, faces):
+    mesh = trimesh.Trimesh(vertices=verts, faces=faces, process=False)
+    curvature = trimesh.curvature.discrete_mean_curvature_measure(mesh, mesh.vertices, radius=1.5)
+    return curvature
