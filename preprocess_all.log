@@ -5236,4 +5236,1375 @@ num of vertices before/after: 122773 / 162315
 num of vertices before/after: 122881 / 151648
 num of vertices before/after: 122881 / 162542
 87 154229
- 31%|███       | 88/283 [2:39:53<5:44:05, 105.87s/it] 31%|███▏      | 89/283 [2:41:38<5:41:33, 105.64s/it] 32%|███▏      | 90/283 [2:43:25<5:40:40, 105.91s/it] 32%|███▏      | 91/283 [2:45:14<5:42:04, 106.90s/it] 33%|███▎      | 92/283 [2:47:01<5:40:30, 106.97s/it] 33%|███▎      | 93/283 [2:48:52<5:42:10, 108.05s/it] 33%|███▎      | 94/283 [2:50:40<5:40:35, 108.13s/it] 34%|███▎      | 95/283 [2:52:28<5:38:30, 108.03s/it] 34%|███▍      | 96/283 [2:54:13<5:34:01, 107.17s/it] 34%|███▍      | 97/283 [2:56:00<5:32:06, 107.13s/it] 35%|███▍      | 98/283 [2:57:51<5:33:32, 108.18s/it] 35%|███▍      | 99/283 [2:59:40<5:33:07, 108.63s/it] 35%|███▌      | 100/283 [3:01:32<5:34:35, 109.70s/it] 36%|███▌      | 101/283 [3:03:21<5:31:47, 109.38s/it] 36%|███▌      | 102/283 [3:05:08<5:28:03, 108.75s/it] 36%|███▋      | 103/283 [3:06:59<5:28:13, 109.41s/it] 37%|███▋      | 104/283 [3:08:49<5:26:37, 109.48s/it] 37%|███▋      | 105/283 [3:10:44<5:30:03, 111.26s/it] 37%|███▋      | 106/283 [3:12:34<5:27:13, 110.92s/it] 38%|███▊      | 107/283 [3:14:26<5:25:39, 111.02s/it] 38%|███▊      | 108/283 [3:16:14<5:21:48, 110.33s/it] 39%|███▊      | 109/283 [3:18:02<5:17:58, 109.65s/it] 39%|███▉      | 110/283 [3:19:51<5:15:33, 109.44s/it] 39%|███▉      | 111/283 [3:21:41<5:14:05, 109.57s/it]
+ 31%|███       | 88/283 [2:39:53<5:44:05, 105.87s/it] 31%|███▏      | 89/283 [2:41:38<5:41:33, 105.64s/it] 32%|███▏      | 90/283 [2:43:25<5:40:40, 105.91s/it] 32%|███▏      | 91/283 [2:45:14<5:42:04, 106.90s/it] 33%|███▎      | 92/283 [2:47:01<5:40:30, 106.97s/it] 33%|███▎      | 93/283 [2:48:52<5:42:10, 108.05s/it] 33%|███▎      | 94/283 [2:50:40<5:40:35, 108.13s/it] 34%|███▎      | 95/283 [2:52:28<5:38:30, 108.03s/it] 34%|███▍      | 96/283 [2:54:13<5:34:01, 107.17s/it] 34%|███▍      | 97/283 [2:56:00<5:32:06, 107.13s/it] 35%|███▍      | 98/283 [2:57:51<5:33:32, 108.18s/it] 35%|███▍      | 99/283 [2:59:40<5:33:07, 108.63s/it] 35%|███▌      | 100/283 [3:01:32<5:34:35, 109.70s/it] 36%|███▌      | 101/283 [3:03:21<5:31:47, 109.38s/it] 36%|███▌      | 102/283 [3:05:08<5:28:03, 108.75s/it] 36%|███▋      | 103/283 [3:06:59<5:28:13, 109.41s/it] 37%|███▋      | 104/283 [3:08:49<5:26:37, 109.48s/it] 37%|███▋      | 105/283 [3:10:44<5:30:03, 111.26s/it] 37%|███▋      | 106/283 [3:12:34<5:27:13, 110.92s/it] 38%|███▊      | 107/283 [3:14:26<5:25:39, 111.02s/it] 38%|███▊      | 108/283 [3:16:14<5:21:48, 110.33s/it] 39%|███▊      | 109/283 [3:18:02<5:17:58, 109.65s/it] 39%|███▉      | 110/283 [3:19:51<5:15:33, 109.44s/it] 39%|███▉      | 111/283 [3:21:41<5:14:05, 109.57s/it] 40%|███▉      | 112/283 [3:23:27<5:09:21, 108.55s/it] 40%|███▉      | 113/283 [3:25:15<5:06:55, 108.33s/it] 40%|████      | 114/283 [3:27:02<5:03:33, 107.78s/it] 41%|████      | 115/283 [3:28:49<5:01:15, 107.59s/it] 41%|████      | 116/283 [3:30:35<4:58:06, 107.10s/it]Dice after registration: 0.9594764924643647
+Dice after registration: 0.9655808230662897
+num of vertices before/after: 121849 / 150214
+num of vertices before/after: 121849 / 161738
+num of vertices before/after: 122109 / 149688
+num of vertices before/after: 122109 / 163555
+88 154936
+Dice after registration: 0.9509090114227543
+Dice after registration: 0.9694576214637537
+num of vertices before/after: 148806 / 151375
+num of vertices before/after: 148806 / 166987
+num of vertices before/after: 152245 / 151496
+num of vertices before/after: 152245 / 167599
+89 155635
+Dice after registration: 0.9552545681695781
+Dice after registration: 0.9672940894877686
+num of vertices before/after: 145276 / 152328
+num of vertices before/after: 145276 / 165846
+num of vertices before/after: 145281 / 152308
+num of vertices before/after: 145281 / 166162
+90 155938
+Dice after registration: 0.9583112675404882
+Dice after registration: 0.9647496046444354
+num of vertices before/after: 175825 / 153997
+num of vertices before/after: 175825 / 170329
+num of vertices before/after: 175754 / 153681
+num of vertices before/after: 175754 / 171327
+91 156536
+Dice after registration: 0.9607900394103492
+Dice after registration: 0.9663342133568006
+num of vertices before/after: 154487 / 151461
+num of vertices before/after: 154487 / 168397
+num of vertices before/after: 153958 / 152107
+num of vertices before/after: 153958 / 167595
+92 156637
+Dice after registration: 0.9536961860033818
+Dice after registration: 0.9639666231441205
+num of vertices before/after: 151162 / 153847
+num of vertices before/after: 151162 / 165993
+num of vertices before/after: 152818 / 153162
+num of vertices before/after: 152818 / 166824
+93 157942
+Dice after registration: 0.9522879710146087
+Dice after registration: 0.9628232449901518
+num of vertices before/after: 132687 / 150696
+num of vertices before/after: 132687 / 161778
+num of vertices before/after: 134303 / 150527
+num of vertices before/after: 134303 / 162513
+94 158540
+Dice after registration: 0.9586742777383204
+Dice after registration: 0.9666141483177636
+num of vertices before/after: 139259 / 151628
+num of vertices before/after: 139259 / 165014
+num of vertices before/after: 140304 / 151690
+num of vertices before/after: 140304 / 165013
+95 158843
+Dice after registration: 0.9604041826570091
+Dice after registration: 0.9670782334246812
+num of vertices before/after: 137098 / 153097
+num of vertices before/after: 137098 / 164763
+num of vertices before/after: 137732 / 153056
+num of vertices before/after: 137732 / 165760
+96 159744
+Dice after registration: 0.9591943899071713
+Dice after registration: 0.9653515909550867
+num of vertices before/after: 151257 / 152738
+num of vertices before/after: 151257 / 166645
+num of vertices before/after: 151745 / 152455
+num of vertices before/after: 151745 / 167330
+97 159946
+Dice after registration: 0.9492041343554056
+Dice after registration: 0.9625517439260864
+num of vertices before/after: 166988 / 153237
+num of vertices before/after: 166988 / 168294
+num of vertices before/after: 169973 / 153097
+num of vertices before/after: 169973 / 168069
+98 160830
+Dice after registration: 0.9539893065422105
+Dice after registration: 0.9673860207484032
+num of vertices before/after: 143100 / 154364
+num of vertices before/after: 143100 / 169502
+num of vertices before/after: 143607 / 153572
+num of vertices before/after: 143607 / 168356
+99 161630
+Dice after registration: 0.9579718634709162
+Dice after registration: 0.9658644257088566
+num of vertices before/after: 154944 / 155044
+num of vertices before/after: 154944 / 170130
+num of vertices before/after: 155191 / 155491
+num of vertices before/after: 155191 / 169846
+100 161731
+Dice after registration: 0.9577015225690975
+Dice after registration: 0.9682000613170837
+num of vertices before/after: 127022 / 150334
+num of vertices before/after: 127022 / 162561
+num of vertices before/after: 125837 / 150809
+num of vertices before/after: 125837 / 163301
+101 162026
+Dice after registration: 0.9533614119349232
+Dice after registration: 0.9669411156954455
+num of vertices before/after: 126064 / 151966
+num of vertices before/after: 126064 / 163935
+num of vertices before/after: 125414 / 151992
+num of vertices before/after: 125414 / 162661
+102 162733
+Dice after registration: 0.957788883417598
+Dice after registration: 0.9679292335371815
+num of vertices before/after: 143525 / 151537
+num of vertices before/after: 143525 / 166554
+num of vertices before/after: 144706 / 152080
+num of vertices before/after: 144706 / 165971
+103 163432
+Dice after registration: 0.952262353806678
+Dice after registration: 0.9649666188966715
+num of vertices before/after: 139747 / 152787
+num of vertices before/after: 139747 / 164695
+num of vertices before/after: 139253 / 152992
+num of vertices before/after: 139253 / 164353
+104 165436
+Dice after registration: 0.9503881730726309
+Dice after registration: 0.9683496457324212
+num of vertices before/after: 149590 / 153995
+num of vertices before/after: 149590 / 168497
+num of vertices before/after: 152460 / 153691
+num of vertices before/after: 152460 / 169051
+105 165941
+Dice after registration: 0.9566426909169785
+Dice after registration: 0.9680730513815207
+num of vertices before/after: 126978 / 151384
+num of vertices before/after: 126978 / 163181
+num of vertices before/after: 127395 / 150871
+num of vertices before/after: 127395 / 162285
+106 166438
+Dice after registration: 0.9536291883376764
+Dice after registration: 0.9623477746452787
+num of vertices before/after: 161556 / 153835
+num of vertices before/after: 161556 / 172374
+num of vertices before/after: 161387 / 153393
+num of vertices before/after: 161387 / 172006
+107 167238
+Dice after registration: 0.9606904168599258
+Dice after registration: 0.9661435006606661
+num of vertices before/after: 147298 / 154968
+num of vertices before/after: 147298 / 169430
+num of vertices before/after: 147710 / 154195
+num of vertices before/after: 147710 / 169337
+108 168139
+Dice after registration: 0.9548143511364912
+Dice after registration: 0.9606766278323674
+num of vertices before/after: 156245 / 153466
+num of vertices before/after: 156245 / 170424
+num of vertices before/after: 157824 / 153534
+num of vertices before/after: 157824 / 170295
+109 168240
+Dice after registration: 0.9533508712849387
+Dice after registration: 0.9634226974031478
+num of vertices before/after: 142764 / 153034
+num of vertices before/after: 142764 / 165206
+num of vertices before/after: 143626 / 152737
+num of vertices before/after: 143626 / 166739
+110 169545
+Dice after registration: 0.9549819404167086
+Dice after registration: 0.9671723036123921
+num of vertices before/after: 181674 / 154286
+num of vertices before/after: 181674 / 173421
+num of vertices before/after: 180831 / 154444
+num of vertices before/after: 180831 / 172974
+111 169747
+Dice after registration: 0.960539076311552
+Dice after registration: 0.9674614209316768
+num of vertices before/after: 135672 / 151044
+num of vertices before/after: 135672 / 164370
+num of vertices before/after: 138336 / 150826
+num of vertices before/after: 138336 / 165022
+112 170934
+Dice after registration: 0.9599631943024471
+Dice after registration: 0.9685322922858471
+num of vertices before/after: 150327 / 151841
+num of vertices before/after: 150327 / 169069
+num of vertices before/after: 153390 / 151761
+num of vertices before/after: 153390 / 167115
+113 171431
+Dice after registration: 0.9516231986995496
+Dice after registration: 0.9643247793827757
+num of vertices before/after: 131571 / 151347
+num of vertices before/after: 131571 / 164675
+num of vertices before/after: 133047 / 151408
+num of vertices before/after: 133047 / 164136
+114 172635
+Dice after registration: 0.9537289537957566
+Dice after registration: 0.9649295544896848
+num of vertices before/after: 149628 / 151540
+num of vertices before/after: 149628 / 164740
+num of vertices before/after: 150975 / 151868
+num of vertices before/after: 150975 / 165416
+115 173132
+Dice after registration: 0.9574986342170047
+Dice after registration: 0.9651805661178029
+num of vertices before/after: 153983 / 153360
+num of vertices before/after: 153983 / 166524
+num of vertices before/after: 151300 / 152886
+num of vertices before/after: 151300 / 166637
+116 173435
+ 41%|████▏     | 117/283 [3:32:20<4:54:31, 106.46s/it] 42%|████▏     | 118/283 [3:34:07<4:53:32, 106.74s/it] 42%|████▏     | 119/283 [3:35:56<4:53:01, 107.20s/it] 42%|████▏     | 120/283 [3:37:41<4:49:52, 106.70s/it] 43%|████▎     | 121/283 [3:39:28<4:48:24, 106.82s/it] 43%|████▎     | 122/283 [3:41:15<4:47:00, 106.96s/it] 43%|████▎     | 123/283 [3:43:01<4:44:18, 106.62s/it] 44%|████▍     | 124/283 [3:44:47<4:42:03, 106.44s/it] 44%|████▍     | 125/283 [3:46:35<4:41:13, 106.79s/it] 45%|████▍     | 126/283 [3:48:22<4:39:18, 106.74s/it] 45%|████▍     | 127/283 [3:50:07<4:36:31, 106.36s/it] 45%|████▌     | 128/283 [3:51:53<4:34:22, 106.21s/it] 46%|████▌     | 129/283 [3:53:42<4:34:48, 107.07s/it] 46%|████▌     | 130/283 [3:55:28<4:32:03, 106.69s/it] 46%|████▋     | 131/283 [3:57:15<4:30:54, 106.94s/it] 47%|████▋     | 132/283 [3:59:00<4:27:44, 106.38s/it] 47%|████▋     | 133/283 [4:00:47<4:26:04, 106.43s/it] 47%|████▋     | 134/283 [4:02:33<4:24:19, 106.44s/it] 48%|████▊     | 135/283 [4:04:18<4:21:28, 106.00s/it] 48%|████▊     | 136/283 [4:06:05<4:20:19, 106.25s/it] 48%|████▊     | 137/283 [4:07:55<4:21:18, 107.39s/it] 49%|████▉     | 138/283 [4:09:45<4:21:04, 108.03s/it] 49%|████▉     | 139/283 [4:11:36<4:21:37, 109.01s/it] 49%|████▉     | 140/283 [4:13:30<4:23:23, 110.52s/it] 50%|████▉     | 141/283 [4:15:25<4:24:22, 111.71s/it] 50%|█████     | 142/283 [4:17:15<4:21:58, 111.48s/it] 51%|█████     | 143/283 [4:19:09<4:21:21, 112.01s/it] 51%|█████     | 144/283 [4:20:55<4:15:35, 110.33s/it] 51%|█████     | 145/283 [4:22:42<4:11:40, 109.42s/it]Dice after registration: 0.9539469625686119
+Dice after registration: 0.9630611595227018
+num of vertices before/after: 145511 / 152257
+num of vertices before/after: 145511 / 165248
+num of vertices before/after: 147629 / 152126
+num of vertices before/after: 147629 / 165829
+117 173839
+Dice after registration: 0.9570704508091612
+Dice after registration: 0.9637531073633707
+num of vertices before/after: 122779 / 153396
+num of vertices before/after: 122779 / 164777
+num of vertices before/after: 122289 / 152666
+num of vertices before/after: 122289 / 165004
+118 175035
+Dice after registration: 0.9616622064633038
+Dice after registration: 0.9684480074196687
+num of vertices before/after: 147516 / 155060
+num of vertices before/after: 147516 / 170109
+num of vertices before/after: 147659 / 155462
+num of vertices before/after: 147659 / 171320
+119 175136
+Dice after registration: 0.9613844025536928
+Dice after registration: 0.9656728968004766
+num of vertices before/after: 117875 / 150878
+num of vertices before/after: 117875 / 164533
+num of vertices before/after: 118856 / 151944
+num of vertices before/after: 118856 / 164924
+120 175540
+Dice after registration: 0.9586288588498604
+Dice after registration: 0.9677504292151073
+num of vertices before/after: 153926 / 155224
+num of vertices before/after: 153926 / 170266
+num of vertices before/after: 156058 / 155641
+num of vertices before/after: 156058 / 170361
+121 176037
+Dice after registration: 0.9617192263155667
+Dice after registration: 0.9677032509170747
+num of vertices before/after: 131558 / 151560
+num of vertices before/after: 131558 / 163501
+num of vertices before/after: 131303 / 151042
+num of vertices before/after: 131303 / 163780
+122 176542
+Dice after registration: 0.9626714673851089
+Dice after registration: 0.9660112963207034
+num of vertices before/after: 127015 / 151955
+num of vertices before/after: 127015 / 164966
+num of vertices before/after: 125634 / 152260
+num of vertices before/after: 125634 / 165207
+123 176744
+Dice after registration: 0.9538916137043091
+Dice after registration: 0.9632938454742235
+num of vertices before/after: 160704 / 155338
+num of vertices before/after: 160704 / 168187
+num of vertices before/after: 160978 / 155328
+num of vertices before/after: 160978 / 169790
+124 177241
+Dice after registration: 0.9559956151508302
+Dice after registration: 0.9658329830399754
+num of vertices before/after: 150703 / 154135
+num of vertices before/after: 150703 / 168105
+num of vertices before/after: 151557 / 154057
+num of vertices before/after: 151557 / 168459
+125 177342
+Dice after registration: 0.9592019648302158
+Dice after registration: 0.967057896323123
+num of vertices before/after: 145580 / 154230
+num of vertices before/after: 145580 / 169187
+num of vertices before/after: 144811 / 154208
+num of vertices before/after: 144811 / 169517
+126 177645
+Dice after registration: 0.9632764612117659
+Dice after registration: 0.9694217081309229
+num of vertices before/after: 137176 / 151258
+num of vertices before/after: 137176 / 163578
+num of vertices before/after: 136517 / 150591
+num of vertices before/after: 136517 / 163760
+127 178647
+Dice after registration: 0.9644748138542932
+Dice after registration: 0.9684194946218203
+num of vertices before/after: 131711 / 150530
+num of vertices before/after: 131711 / 164187
+num of vertices before/after: 136670 / 151884
+num of vertices before/after: 136670 / 165563
+128 178950
+Dice after registration: 0.9551841735094719
+Dice after registration: 0.9623618002117321
+num of vertices before/after: 162561 / 152919
+num of vertices before/after: 162561 / 168257
+num of vertices before/after: 162803 / 153223
+num of vertices before/after: 162803 / 167595
+129 179245
+Dice after registration: 0.961832547152689
+Dice after registration: 0.9681403231362353
+num of vertices before/after: 119097 / 151011
+num of vertices before/after: 119097 / 162279
+num of vertices before/after: 120138 / 151301
+num of vertices before/after: 120138 / 162004
+130 179952
+Dice after registration: 0.9589454001225931
+Dice after registration: 0.9672596323887022
+num of vertices before/after: 124811 / 152758
+num of vertices before/after: 124811 / 165791
+num of vertices before/after: 126788 / 152820
+num of vertices before/after: 126788 / 166320
+131 180129
+Dice after registration: 0.9629501592335612
+Dice after registration: 0.96872421905789
+num of vertices before/after: 126357 / 150795
+num of vertices before/after: 126357 / 162810
+num of vertices before/after: 129908 / 151558
+num of vertices before/after: 129908 / 164515
+132 180432
+Dice after registration: 0.961704571103736
+Dice after registration: 0.9659462892411134
+num of vertices before/after: 132620 / 151004
+num of vertices before/after: 132620 / 164267
+num of vertices before/after: 131852 / 151182
+num of vertices before/after: 131852 / 165478
+133 180836
+Dice after registration: 0.9519519161171556
+Dice after registration: 0.9657784462697268
+num of vertices before/after: 120314 / 152220
+num of vertices before/after: 120314 / 163645
+num of vertices before/after: 119760 / 152636
+num of vertices before/after: 119760 / 162906
+134 181232
+Dice after registration: 0.9611060122248328
+Dice after registration: 0.968467393617818
+num of vertices before/after: 127446 / 150744
+num of vertices before/after: 127446 / 162660
+num of vertices before/after: 127913 / 150528
+num of vertices before/after: 127913 / 162804
+135 181636
+Dice after registration: 0.9563427730017551
+Dice after registration: 0.9656072863387459
+num of vertices before/after: 123115 / 151628
+num of vertices before/after: 123115 / 162517
+num of vertices before/after: 123645 / 151999
+num of vertices before/after: 123645 / 163239
+136 182032
+Dice after registration: 0.9556503549481121
+Dice after registration: 0.9624073888714496
+num of vertices before/after: 126708 / 151867
+num of vertices before/after: 126708 / 164625
+num of vertices before/after: 127824 / 152841
+num of vertices before/after: 127824 / 164545
+137 183337
+Dice after registration: 0.9561643547276026
+Dice after registration: 0.9670621212742918
+num of vertices before/after: 117418 / 151616
+num of vertices before/after: 117418 / 163079
+num of vertices before/after: 117324 / 151220
+num of vertices before/after: 117324 / 162631
+138 186040
+Dice after registration: 0.9621010429218184
+Dice after registration: 0.968804878994472
+num of vertices before/after: 152898 / 151367
+num of vertices before/after: 152898 / 165789
+num of vertices before/after: 155834 / 151611
+num of vertices before/after: 155834 / 166625
+139 187143
+Dice after registration: 0.9623958267511988
+Dice after registration: 0.9696726694573108
+num of vertices before/after: 149916 / 152133
+num of vertices before/after: 149916 / 167423
+num of vertices before/after: 150798 / 151686
+num of vertices before/after: 150798 / 166978
+140 187547
+Dice after registration: 0.9622058869855943
+Dice after registration: 0.9682812671589192
+num of vertices before/after: 138307 / 151402
+num of vertices before/after: 138307 / 164857
+num of vertices before/after: 138298 / 151971
+num of vertices before/after: 138298 / 164983
+141 188347
+Dice after registration: 0.9647975614210944
+Dice after registration: 0.972008679415132
+num of vertices before/after: 132213 / 152860
+num of vertices before/after: 132213 / 166282
+num of vertices before/after: 133582 / 153562
+num of vertices before/after: 133582 / 166077
+142 189349
+Dice after registration: 0.9583664097166311
+Dice after registration: 0.9661435017875736
+num of vertices before/after: 131306 / 151171
+num of vertices before/after: 131306 / 163155
+num of vertices before/after: 131385 / 151682
+num of vertices before/after: 131385 / 162647
+143 191437
+Dice after registration: 0.9581520276893273
+Dice after registration: 0.9643949351466626
+num of vertices before/after: 126014 / 150183
+num of vertices before/after: 126014 / 164330
+num of vertices before/after: 126259 / 150257
+num of vertices before/after: 126259 / 164582
+144 192035
+Dice after registration: 0.9547267901266828
+Dice after registration: 0.9652729631046987
+num of vertices before/after: 116023 / 150367
+num of vertices before/after: 116023 / 159662
+num of vertices before/after: 116386 / 149923
+num of vertices before/after: 116386 / 160839
+145  52%|█████▏    | 146/283 [4:24:37<4:13:35, 111.06s/it] 52%|█████▏    | 147/283 [4:26:29<4:12:16, 111.30s/it] 52%|█████▏    | 148/283 [4:28:27<4:14:57, 113.31s/it] 53%|█████▎    | 149/283 [4:30:19<4:12:17, 112.97s/it] 53%|█████▎    | 150/283 [4:32:14<4:11:50, 113.61s/it] 53%|█████▎    | 151/283 [4:34:05<4:07:49, 112.65s/it] 54%|█████▎    | 152/283 [4:35:56<4:04:38, 112.05s/it] 54%|█████▍    | 153/283 [4:37:44<4:00:19, 110.92s/it] 54%|█████▍    | 154/283 [4:39:34<3:57:45, 110.59s/it] 55%|█████▍    | 155/283 [4:41:25<3:56:33, 110.89s/it] 55%|█████▌    | 156/283 [4:43:14<3:53:10, 110.16s/it] 55%|█████▌    | 157/283 [4:45:03<3:50:47, 109.90s/it] 56%|█████▌    | 158/283 [4:46:52<3:48:27, 109.66s/it] 56%|█████▌    | 159/283 [4:48:41<3:46:17, 109.50s/it] 57%|█████▋    | 160/283 [4:50:30<3:43:51, 109.20s/it] 57%|█████▋    | 161/283 [4:52:19<3:42:16, 109.31s/it] 57%|█████▋    | 162/283 [4:54:10<3:41:05, 109.64s/it] 58%|█████▊    | 163/283 [4:55:57<3:37:57, 108.98s/it] 58%|█████▊    | 164/283 [4:57:44<3:35:00, 108.41s/it] 58%|█████▊    | 165/283 [4:59:32<3:32:50, 108.22s/it] 59%|█████▊    | 166/283 [5:01:19<3:30:35, 108.00s/it] 59%|█████▉    | 167/283 [5:03:09<3:29:48, 108.52s/it] 59%|█████▉    | 168/283 [5:05:01<3:29:53, 109.51s/it] 60%|█████▉    | 169/283 [5:06:49<3:27:06, 109.00s/it] 60%|██████    | 170/283 [5:08:39<3:26:12, 109.49s/it] 60%|██████    | 171/283 [5:10:29<3:24:17, 109.45s/it] 61%|██████    | 172/283 [5:12:15<3:20:43, 108.50s/it] 61%|██████    | 173/283 [5:14:04<3:18:55, 108.50s/it]192641
+Dice after registration: 0.9638870232650958
+Dice after registration: 0.9666393677816848
+num of vertices before/after: 113233 / 151197
+num of vertices before/after: 113233 / 162279
+num of vertices before/after: 113008 / 150725
+num of vertices before/after: 113008 / 160935
+146 194746
+Dice after registration: 0.9554308924660323
+Dice after registration: 0.9656789525991033
+num of vertices before/after: 135480 / 149869
+num of vertices before/after: 135480 / 161867
+num of vertices before/after: 137872 / 150759
+num of vertices before/after: 137872 / 162538
+147 196346
+Dice after registration: 0.9595536013432063
+Dice after registration: 0.9656060542841596
+num of vertices before/after: 168247 / 154945
+num of vertices before/after: 168247 / 173332
+num of vertices before/after: 169257 / 155496
+num of vertices before/after: 169257 / 174249
+148 196851
+Dice after registration: 0.9578805179987973
+Dice after registration: 0.9655981042730207
+num of vertices before/after: 153599 / 153648
+num of vertices before/after: 153599 / 168619
+num of vertices before/after: 152405 / 154168
+num of vertices before/after: 152405 / 168165
+149 197449
+Dice after registration: 0.9572842954828372
+Dice after registration: 0.9672519444746149
+num of vertices before/after: 124604 / 150193
+num of vertices before/after: 124604 / 164142
+num of vertices before/after: 125038 / 150752
+num of vertices before/after: 125038 / 163382
+150 198653
+Dice after registration: 0.9451019686854678
+Dice after registration: 0.9620118089192327
+num of vertices before/after: 148049 / 153718
+num of vertices before/after: 148049 / 167415
+num of vertices before/after: 147621 / 152627
+num of vertices before/after: 147621 / 166307
+151 199453
+Dice after registration: 0.9557054196618321
+Dice after registration: 0.964405804686052
+num of vertices before/after: 129602 / 149261
+num of vertices before/after: 129602 / 161989
+num of vertices before/after: 129495 / 149634
+num of vertices before/after: 129495 / 163092
+152 200614
+Dice after registration: 0.9568154811016907
+Dice after registration: 0.963675942605207
+num of vertices before/after: 135014 / 151743
+num of vertices before/after: 135014 / 163451
+num of vertices before/after: 135909 / 151888
+num of vertices before/after: 135909 / 163928
+153 201717
+Dice after registration: 0.9594693653413348
+Dice after registration: 0.9691389738191903
+num of vertices before/after: 152046 / 152176
+num of vertices before/after: 152046 / 167568
+num of vertices before/after: 154745 / 151819
+num of vertices before/after: 154745 / 167076
+154 202113
+Dice after registration: 0.9564824910518559
+Dice after registration: 0.9659052034237642
+num of vertices before/after: 145456 / 154288
+num of vertices before/after: 145456 / 167604
+num of vertices before/after: 146435 / 155162
+num of vertices before/after: 146435 / 167689
+155 202820
+Dice after registration: 0.9597567977814898
+Dice after registration: 0.9668202182619082
+num of vertices before/after: 112902 / 151761
+num of vertices before/after: 112902 / 161933
+num of vertices before/after: 113911 / 150668
+num of vertices before/after: 113911 / 161593
+156 204016
+Dice after registration: 0.9601191714373769
+Dice after registration: 0.9678536992512181
+num of vertices before/after: 140975 / 151611
+num of vertices before/after: 140975 / 165149
+num of vertices before/after: 142274 / 151920
+num of vertices before/after: 142274 / 166198
+157 204218
+Dice after registration: 0.9519082815696173
+Dice after registration: 0.9625041758230972
+num of vertices before/after: 140346 / 152365
+num of vertices before/after: 140346 / 164275
+num of vertices before/after: 141873 / 152103
+num of vertices before/after: 141873 / 163414
+158 205119
+Dice after registration: 0.9573923249279795
+Dice after registration: 0.9666343585307645
+num of vertices before/after: 150403 / 152776
+num of vertices before/after: 150403 / 166901
+num of vertices before/after: 151535 / 153374
+num of vertices before/after: 151535 / 166811
+159 205220
+Dice after registration: 0.9588174350788077
+Dice after registration: 0.9656027112364314
+num of vertices before/after: 125052 / 151834
+num of vertices before/after: 125052 / 162865
+num of vertices before/after: 126369 / 151400
+num of vertices before/after: 126369 / 164250
+160 206929
+Dice after registration: 0.9562008023934363
+Dice after registration: 0.9684956038110516
+num of vertices before/after: 153266 / 153237
+num of vertices before/after: 153266 / 168707
+num of vertices before/after: 152487 / 153021
+num of vertices before/after: 152487 / 169951
+161 207628
+Dice after registration: 0.9619615980354508
+Dice after registration: 0.967818027242124
+num of vertices before/after: 157289 / 154991
+num of vertices before/after: 157289 / 171321
+num of vertices before/after: 156703 / 155189
+num of vertices before/after: 156703 / 171640
+162 208024
+Dice after registration: 0.9608526484679518
+Dice after registration: 0.9658090502266071
+num of vertices before/after: 117284 / 150508
+num of vertices before/after: 117284 / 162899
+num of vertices before/after: 117268 / 150891
+num of vertices before/after: 117268 / 163120
+163 208428
+Dice after registration: 0.9602017595110989
+Dice after registration: 0.964126881756161
+num of vertices before/after: 108026 / 151218
+num of vertices before/after: 108026 / 159926
+num of vertices before/after: 109848 / 151487
+num of vertices before/after: 109848 / 163500
+164 209531
+Dice after registration: 0.9456897000406792
+Dice after registration: 0.9663424133341664
+num of vertices before/after: 144127 / 151359
+num of vertices before/after: 144127 / 164182
+num of vertices before/after: 140130 / 150874
+num of vertices before/after: 140130 / 164200
+165 211316
+Dice after registration: 0.9570012088737178
+Dice after registration: 0.967567388626476
+num of vertices before/after: 114578 / 151118
+num of vertices before/after: 114578 / 161272
+num of vertices before/after: 114523 / 150902
+num of vertices before/after: 114523 / 160673
+166 211417
+Dice after registration: 0.9590237810698733
+Dice after registration: 0.9664458797276277
+num of vertices before/after: 135318 / 152248
+num of vertices before/after: 135318 / 164381
+num of vertices before/after: 134505 / 150637
+num of vertices before/after: 134505 / 164008
+167 212015
+Dice after registration: 0.9481875457480037
+Dice after registration: 0.9666597925048636
+num of vertices before/after: 149086 / 153644
+num of vertices before/after: 149086 / 170122
+num of vertices before/after: 150427 / 154063
+num of vertices before/after: 150427 / 171098
+168 212419
+Dice after registration: 0.9625048980356002
+Dice after registration: 0.9692046192769329
+num of vertices before/after: 135283 / 151090
+num of vertices before/after: 135283 / 164603
+num of vertices before/after: 134017 / 150818
+num of vertices before/after: 134017 / 163701
+169 214221
+Dice after registration: 0.95511544610656
+Dice after registration: 0.9669267887510256
+num of vertices before/after: 126332 / 152179
+num of vertices before/after: 126332 / 165283
+num of vertices before/after: 126236 / 152123
+num of vertices before/after: 126236 / 164457
+170 214524
+Dice after registration: 0.9465801025303361
+Dice after registration: 0.9678213580819761
+num of vertices before/after: 142955 / 151384
+num of vertices before/after: 142955 / 164778
+num of vertices before/after: 144580 / 150787
+num of vertices before/after: 144580 / 165333
+171 214625
+Dice after registration: 0.9585092822236944
+Dice after registration: 0.9660824591824247
+num of vertices before/after: 140949 / 152627
+num of vertices before/after: 140949 / 165313
+num of vertices before/after: 140637 / 152033
+num of vertices before/after: 140637 / 165125
+172 217126
+Dice after registration: 0.9565620559166235
+Dice after registration: 0.9651956271974297
+num of vertices before/after: 135018 / 152835
+num of vertices before/after: 135018 / 165876
+num of vertices before/after: 136698 / 152348
+num of vertices before/after: 136698 / 166031
+173 217429
+Dice after registration: 0.9618207813671916
+Dice after registration: 0.9667450182048689
+num of vertices before/after: 126818 / 151554
+num of vertices before/after: 126818 / 164100
+num of vertices before/after: 128598 / 151332
+ 61%|██████▏   | 174/283 [5:15:51<3:16:44, 108.30s/it] 62%|██████▏   | 175/283 [5:17:40<3:14:51, 108.25s/it] 62%|██████▏   | 176/283 [5:19:28<3:13:19, 108.40s/it] 63%|██████▎   | 177/283 [5:21:17<3:11:40, 108.50s/it] 63%|██████▎   | 178/283 [5:23:06<3:09:57, 108.54s/it] 63%|██████▎   | 179/283 [5:24:55<3:08:24, 108.70s/it] 64%|██████▎   | 180/283 [5:26:43<3:06:23, 108.58s/it] 64%|██████▍   | 181/283 [5:28:32<3:04:38, 108.61s/it] 64%|██████▍   | 182/283 [5:30:20<3:02:31, 108.43s/it] 65%|██████▍   | 183/283 [5:32:06<2:59:50, 107.91s/it] 65%|██████▌   | 184/283 [5:33:54<2:57:55, 107.84s/it] 65%|██████▌   | 185/283 [5:35:42<2:56:09, 107.85s/it] 66%|██████▌   | 186/283 [5:37:30<2:54:39, 108.04s/it] 66%|██████▌   | 187/283 [5:39:19<2:52:58, 108.11s/it] 66%|██████▋   | 188/283 [5:41:07<2:51:24, 108.25s/it] 67%|██████▋   | 189/283 [5:42:57<2:50:24, 108.77s/it] 67%|██████▋   | 190/283 [5:44:45<2:48:12, 108.53s/it] 67%|██████▋   | 191/283 [5:46:34<2:46:18, 108.46s/it] 68%|██████▊   | 192/283 [5:48:22<2:44:42, 108.60s/it] 68%|██████▊   | 193/283 [5:50:10<2:42:26, 108.29s/it] 69%|██████▊   | 194/283 [5:52:00<2:41:14, 108.70s/it] 69%|██████▉   | 195/283 [5:53:49<2:39:31, 108.77s/it] 69%|██████▉   | 196/283 [5:55:37<2:37:31, 108.64s/it] 70%|██████▉   | 197/283 [5:57:26<2:35:45, 108.67s/it] 70%|██████▉   | 198/283 [5:59:14<2:33:38, 108.45s/it] 70%|███████   | 199/283 [6:01:03<2:32:01, 108.59s/it] 71%|███████   | 200/283 [6:02:50<2:29:31, 108.09s/it] 71%|███████   | 201/283 [6:04:36<2:27:12, 107.72s/it] 71%|███████▏  | 202/283 [6:06:26<2:26:21, 108.41s/it]num of vertices before/after: 128598 / 164315
+174 228434
+Dice after registration: 0.9603826355254942
+Dice after registration: 0.9654638150900989
+num of vertices before/after: 120635 / 150231
+num of vertices before/after: 120635 / 163230
+num of vertices before/after: 120914 / 149751
+num of vertices before/after: 120914 / 161822
+175 238033
+Dice after registration: 0.9627575172333418
+Dice after registration: 0.9696418590656816
+num of vertices before/after: 149817 / 152163
+num of vertices before/after: 149817 / 167995
+num of vertices before/after: 152325 / 152248
+num of vertices before/after: 152325 / 168483
+176 239136
+Dice after registration: 0.9602370324849342
+Dice after registration: 0.9676805494257831
+num of vertices before/after: 147833 / 151192
+num of vertices before/after: 147833 / 165283
+num of vertices before/after: 148689 / 151924
+num of vertices before/after: 148689 / 164177
+177 245333
+Dice after registration: 0.9553667476457557
+Dice after registration: 0.9657287934071048
+num of vertices before/after: 124145 / 151568
+num of vertices before/after: 124145 / 163617
+num of vertices before/after: 125921 / 151060
+num of vertices before/after: 125921 / 163951
+178 257542
+Dice after registration: 0.9575656356211033
+Dice after registration: 0.9649930374479381
+num of vertices before/after: 137787 / 153073
+num of vertices before/after: 137787 / 165146
+num of vertices before/after: 140478 / 152926
+num of vertices before/after: 140478 / 164619
+179 257946
+Dice after registration: 0.9569500651705691
+Dice after registration: 0.9662978934499796
+num of vertices before/after: 141977 / 153057
+num of vertices before/after: 141977 / 167184
+num of vertices before/after: 142794 / 153830
+num of vertices before/after: 142794 / 167991
+180 263436
+Dice after registration: 0.9590639727227571
+Dice after registration: 0.9648742167789529
+num of vertices before/after: 145120 / 152842
+num of vertices before/after: 145120 / 165129
+num of vertices before/after: 144756 / 152945
+num of vertices before/after: 144756 / 166228
+181 268850
+Dice after registration: 0.9611965664100464
+Dice after registration: 0.9657805242878649
+num of vertices before/after: 136947 / 152917
+num of vertices before/after: 136947 / 166338
+num of vertices before/after: 137104 / 152878
+num of vertices before/after: 137104 / 166836
+182 280739
+Dice after registration: 0.9597931388229958
+Dice after registration: 0.967637503340433
+num of vertices before/after: 125440 / 150781
+num of vertices before/after: 125440 / 162197
+num of vertices before/after: 124845 / 151088
+num of vertices before/after: 124845 / 162746
+183 281135
+Dice after registration: 0.9563813822968907
+Dice after registration: 0.9644999888403554
+num of vertices before/after: 152618 / 152423
+num of vertices before/after: 152618 / 165885
+num of vertices before/after: 152795 / 152164
+num of vertices before/after: 152795 / 167068
+184 286347
+Dice after registration: 0.9601823862748743
+Dice after registration: 0.966358053079495
+num of vertices before/after: 142568 / 152099
+num of vertices before/after: 142568 / 165538
+num of vertices before/after: 143502 / 151981
+num of vertices before/after: 143502 / 168396
+185 287248
+Dice after registration: 0.9567241161190388
+Dice after registration: 0.9668730677362873
+num of vertices before/after: 147238 / 153723
+num of vertices before/after: 147238 / 167514
+num of vertices before/after: 146125 / 154589
+num of vertices before/after: 146125 / 168432
+186 298051
+Dice after registration: 0.9518581832758165
+Dice after registration: 0.9670818291404119
+num of vertices before/after: 153699 / 151850
+num of vertices before/after: 153699 / 167145
+num of vertices before/after: 156528 / 152315
+num of vertices before/after: 156528 / 168090
+187 298455
+Dice after registration: 0.9579896053305311
+Dice after registration: 0.9670130624557779
+num of vertices before/after: 140884 / 151438
+num of vertices before/after: 140884 / 165433
+num of vertices before/after: 143348 / 151568
+num of vertices before/after: 143348 / 165564
+188 299154
+Dice after registration: 0.9592931858112386
+Dice after registration: 0.9673924388377705
+num of vertices before/after: 151855 / 152486
+num of vertices before/after: 151855 / 168092
+num of vertices before/after: 149758 / 152327
+num of vertices before/after: 149758 / 168326
+189 304727
+Dice after registration: 0.9601686821273788
+Dice after registration: 0.966535917580001
+num of vertices before/after: 138430 / 151477
+num of vertices before/after: 138430 / 165007
+num of vertices before/after: 138455 / 151265
+num of vertices before/after: 138455 / 165414
+190 305830
+Dice after registration: 0.9595566184351153
+Dice after registration: 0.965463220433742
+num of vertices before/after: 126986 / 151029
+num of vertices before/after: 126986 / 161736
+num of vertices before/after: 129546 / 151164
+num of vertices before/after: 129546 / 163049
+191 309636
+Dice after registration: 0.9578299311261574
+Dice after registration: 0.9659676480693928
+num of vertices before/after: 144408 / 153131
+num of vertices before/after: 144408 / 167690
+num of vertices before/after: 146188 / 152749
+num of vertices before/after: 146188 / 167385
+192 311320
+Dice after registration: 0.9593822417284484
+Dice after registration: 0.9677678781796762
+num of vertices before/after: 133856 / 151221
+num of vertices before/after: 133856 / 165421
+num of vertices before/after: 135699 / 150847
+num of vertices before/after: 135699 / 164844
+193 318637
+Dice after registration: 0.9568797146985907
+Dice after registration: 0.9628736322997214
+num of vertices before/after: 151948 / 151347
+num of vertices before/after: 151948 / 166614
+num of vertices before/after: 152239 / 151398
+num of vertices before/after: 152239 / 168892
+194 320826
+Dice after registration: 0.9592607553640463
+Dice after registration: 0.9651426991734067
+num of vertices before/after: 142327 / 153212
+num of vertices before/after: 142327 / 167030
+num of vertices before/after: 144111 / 153328
+num of vertices before/after: 144111 / 168026
+195 325129
+Dice after registration: 0.952964443475067
+Dice after registration: 0.9615158120034621
+num of vertices before/after: 159098 / 151960
+num of vertices before/after: 159098 / 166329
+num of vertices before/after: 158530 / 151898
+num of vertices before/after: 158530 / 167084
+196 329440
+Dice after registration: 0.9573465663421428
+Dice after registration: 0.96027507138752
+num of vertices before/after: 160851 / 155360
+num of vertices before/after: 160851 / 170431
+num of vertices before/after: 164124 / 155741
+num of vertices before/after: 164124 / 170549
+197 333330
+Dice after registration: 0.9554091267452081
+Dice after registration: 0.9683919661320782
+num of vertices before/after: 124384 / 152508
+num of vertices before/after: 124384 / 163497
+num of vertices before/after: 127551 / 152270
+num of vertices before/after: 127551 / 164531
+198 334635
+Dice after registration: 0.9638080930366765
+Dice after registration: 0.9663813170796435
+num of vertices before/after: 126621 / 153260
+num of vertices before/after: 126621 / 164765
+num of vertices before/after: 130029 / 153181
+num of vertices before/after: 130029 / 165610
+199 339847
+Dice after registration: 0.9610892825735824
+Dice after registration: 0.9653279335956987
+num of vertices before/after: 130398 / 151267
+num of vertices before/after: 130398 / 165813
+num of vertices before/after: 130122 / 151110
+num of vertices before/after: 130122 / 165779
+200 346945
+Dice after registration: 0.9556705695983599
+Dice after registration: 0.9635767982840905
+num of vertices before/after: 129323 / 151554
+num of vertices before/after: 129323 / 162545
+num of vertices before/after: 129816 / 151777
+num of vertices before/after: 129816 / 162708
+201 356948
+Dice after registration: 0.9588751161881987
+Dice after registration: 0.9675576435996804
+num of vertices before/after: 143749 / 152045
+num of vertices before/after: 143749 / 167910
+num of vertices before/after: 147260 / 152467
+num of vertices before/after: 147260 / 169145
+202 360030
+Dice after registration: 0.9612117666817661
+Dice after registration: 0.9674815477704581
+num of vertices before/after: 135468 / 153446
+num of vertices before/after: 135468 / 166864
+ 72%|███████▏  | 203/283 [6:08:15<2:24:41, 108.52s/it] 72%|███████▏  | 204/283 [6:10:02<2:22:22, 108.13s/it] 72%|███████▏  | 205/283 [6:11:51<2:20:55, 108.40s/it] 73%|███████▎  | 206/283 [6:13:40<2:19:11, 108.46s/it] 73%|███████▎  | 207/283 [6:15:28<2:17:13, 108.34s/it] 73%|███████▎  | 208/283 [6:17:17<2:15:32, 108.43s/it] 74%|███████▍  | 209/283 [6:19:04<2:13:26, 108.20s/it] 74%|███████▍  | 210/283 [6:20:53<2:11:55, 108.44s/it] 75%|███████▍  | 211/283 [6:22:41<2:09:53, 108.24s/it] 75%|███████▍  | 212/283 [6:24:31<2:08:43, 108.78s/it] 75%|███████▌  | 213/283 [6:26:20<2:06:57, 108.82s/it] 76%|███████▌  | 214/283 [6:28:06<2:04:11, 107.99s/it] 76%|███████▌  | 215/283 [6:29:55<2:02:41, 108.25s/it] 76%|███████▋  | 216/283 [6:31:43<2:00:52, 108.24s/it] 77%|███████▋  | 217/283 [6:33:31<1:58:49, 108.03s/it] 77%|███████▋  | 218/283 [6:35:18<1:56:49, 107.83s/it] 77%|███████▋  | 219/283 [6:37:07<1:55:20, 108.14s/it] 78%|███████▊  | 220/283 [6:38:56<1:53:55, 108.50s/it] 78%|███████▊  | 221/283 [6:40:45<1:52:09, 108.55s/it] 78%|███████▊  | 222/283 [6:42:34<1:50:27, 108.65s/it] 79%|███████▉  | 223/283 [6:44:22<1:48:28, 108.48s/it] 79%|███████▉  | 224/283 [6:46:11<1:46:41, 108.50s/it] 80%|███████▉  | 225/283 [6:48:00<1:45:06, 108.74s/it] 80%|███████▉  | 226/283 [6:49:50<1:43:35, 109.05s/it] 80%|████████  | 227/283 [6:51:37<1:41:21, 108.59s/it] 81%|████████  | 228/283 [6:53:28<1:40:04, 109.18s/it] 81%|████████  | 229/283 [6:55:20<1:39:10, 110.20s/it] 81%|████████▏ | 230/283 [6:57:08<1:36:47, 109.58s/it] 82%|████████▏ | 231/283 [6:58:56<1:34:32, 109.09s/it]num of vertices before/after: 135468 / 153511
+num of vertices before/after: 135468 / 170276
+203 366042
+Dice after registration: 0.9557332766797457
+Dice after registration: 0.9645678832739483
+num of vertices before/after: 134179 / 150074
+num of vertices before/after: 134179 / 162538
+num of vertices before/after: 134500 / 150364
+num of vertices before/after: 134500 / 163309
+204 366446
+Dice after registration: 0.9533443088752352
+Dice after registration: 0.9651059079140925
+num of vertices before/after: 153324 / 153913
+num of vertices before/after: 153324 / 169443
+num of vertices before/after: 154040 / 153458
+num of vertices before/after: 154040 / 170001
+205 368551
+Dice after registration: 0.961681490338271
+Dice after registration: 0.967674443624859
+num of vertices before/after: 151590 / 151462
+num of vertices before/after: 151590 / 167407
+num of vertices before/after: 153674 / 152042
+num of vertices before/after: 153674 / 167642
+206 378756
+Dice after registration: 0.955437513324461
+Dice after registration: 0.9683224403370962
+num of vertices before/after: 138520 / 150933
+num of vertices before/after: 138520 / 163989
+num of vertices before/after: 140390 / 150427
+num of vertices before/after: 140390 / 163135
+207 378857
+Dice after registration: 0.9589150228950762
+Dice after registration: 0.9666144388703628
+num of vertices before/after: 155844 / 152260
+num of vertices before/after: 155844 / 168826
+num of vertices before/after: 157024 / 152584
+num of vertices before/after: 157024 / 168817
+208 380036
+Dice after registration: 0.9544279131856767
+Dice after registration: 0.9649303442703775
+num of vertices before/after: 154320 / 151317
+num of vertices before/after: 154320 / 165320
+num of vertices before/after: 157391 / 152330
+num of vertices before/after: 157391 / 166785
+209 386250
+Dice after registration: 0.955477228334405
+Dice after registration: 0.9648746642190843
+num of vertices before/after: 162754 / 152177
+num of vertices before/after: 162754 / 169632
+num of vertices before/after: 163037 / 152360
+num of vertices before/after: 163037 / 169506
+210 389357
+Dice after registration: 0.9644838451264639
+Dice after registration: 0.9703341910092231
+num of vertices before/after: 119230 / 150659
+num of vertices before/after: 119230 / 161672
+num of vertices before/after: 121190 / 150788
+num of vertices before/after: 121190 / 162031
+211 392447
+Dice after registration: 0.9539299046434446
+Dice after registration: 0.9633721059126628
+num of vertices before/after: 159915 / 155786
+num of vertices before/after: 159915 / 169830
+num of vertices before/after: 162868 / 156191
+num of vertices before/after: 162868 / 171393
+212 392750
+Dice after registration: 0.9514495288399948
+Dice after registration: 0.965766571866763
+num of vertices before/after: 168758 / 152978
+num of vertices before/after: 168758 / 168985
+num of vertices before/after: 171145 / 153099
+num of vertices before/after: 171145 / 168750
+213 393247
+Dice after registration: 0.9561770109622881
+Dice after registration: 0.9607150950877037
+num of vertices before/after: 130267 / 150893
+num of vertices before/after: 130267 / 161491
+num of vertices before/after: 128332 / 150496
+num of vertices before/after: 128332 / 160341
+214 395756
+Dice after registration: 0.9559211861245474
+Dice after registration: 0.9671171392379582
+num of vertices before/after: 139771 / 153480
+num of vertices before/after: 139771 / 165777
+num of vertices before/after: 141594 / 154037
+num of vertices before/after: 141594 / 165307
+215 479762
+Dice after registration: 0.953069697970188
+Dice after registration: 0.96421008153259
+num of vertices before/after: 152614 / 152072
+num of vertices before/after: 152614 / 167007
+num of vertices before/after: 153906 / 152060
+num of vertices before/after: 153906 / 167371
+216 480141
+Dice after registration: 0.9599403864188574
+Dice after registration: 0.968493550330962
+num of vertices before/after: 135586 / 151288
+num of vertices before/after: 135586 / 166414
+num of vertices before/after: 138449 / 151442
+num of vertices before/after: 138449 / 167009
+217 481042
+Dice after registration: 0.9606938005521064
+Dice after registration: 0.9650483893380014
+num of vertices before/after: 126472 / 150756
+num of vertices before/after: 126472 / 162353
+num of vertices before/after: 125202 / 151214
+num of vertices before/after: 125202 / 162197
+218 492754
+Dice after registration: 0.9512347474104667
+Dice after registration: 0.9572020758084646
+num of vertices before/after: 135837 / 151085
+num of vertices before/after: 135837 / 164870
+num of vertices before/after: 138520 / 151529
+num of vertices before/after: 138520 / 165999
+219 506234
+Dice after registration: 0.9605032854882044
+Dice after registration: 0.9656362320968986
+num of vertices before/after: 146797 / 153578
+num of vertices before/after: 146797 / 168283
+num of vertices before/after: 148994 / 153754
+num of vertices before/after: 148994 / 167678
+220 510225
+Dice after registration: 0.9591972842874369
+Dice after registration: 0.9638826883372114
+num of vertices before/after: 169210 / 153662
+num of vertices before/after: 169210 / 170634
+num of vertices before/after: 170602 / 153236
+num of vertices before/after: 170602 / 170687
+221 518746
+Dice after registration: 0.9538400428728002
+Dice after registration: 0.9605008148954415
+num of vertices before/after: 146846 / 154270
+num of vertices before/after: 146846 / 167026
+num of vertices before/after: 148919 / 153999
+num of vertices before/after: 148919 / 168078
+222 520228
+Dice after registration: 0.9566495456592802
+Dice after registration: 0.9665550717890269
+num of vertices before/after: 134637 / 151202
+num of vertices before/after: 134637 / 166537
+num of vertices before/after: 134009 / 151252
+num of vertices before/after: 134009 / 165541
+223 536647
+Dice after registration: 0.9584793057286374
+Dice after registration: 0.9674068634688597
+num of vertices before/after: 125659 / 153246
+num of vertices before/after: 125659 / 164777
+num of vertices before/after: 128737 / 154063
+num of vertices before/after: 128737 / 165145
+224 540436
+Dice after registration: 0.9604994849882372
+Dice after registration: 0.9680714538671951
+num of vertices before/after: 143672 / 154104
+num of vertices before/after: 143672 / 167668
+num of vertices before/after: 141847 / 155045
+num of vertices before/after: 141847 / 167950
+225 541640
+Dice after registration: 0.944462200439407
+Dice after registration: 0.9619046673187494
+num of vertices before/after: 157086 / 154296
+num of vertices before/after: 157086 / 166933
+num of vertices before/after: 158948 / 154465
+num of vertices before/after: 158948 / 166827
+226 541943
+Dice after registration: 0.9621046328403525
+Dice after registration: 0.96821114323063
+num of vertices before/after: 126374 / 151233
+num of vertices before/after: 126374 / 163778
+num of vertices before/after: 126115 / 150789
+num of vertices before/after: 126115 / 163149
+227 548250
+Dice after registration: 0.9590394370497196
+Dice after registration: 0.9663795438671716
+num of vertices before/after: 150710 / 152506
+num of vertices before/after: 150710 / 167724
+num of vertices before/after: 150571 / 152151
+num of vertices before/after: 150571 / 167192
+228 553344
+Dice after registration: 0.9529498247628414
+Dice after registration: 0.9657650692214811
+num of vertices before/after: 139902 / 152062
+num of vertices before/after: 139902 / 166824
+num of vertices before/after: 141001 / 152543
+num of vertices before/after: 141001 / 166904
+229 555651
+Dice after registration: 0.9611134175130966
+Dice after registration: 0.9670636917645532
+num of vertices before/after: 139447 / 151290
+num of vertices before/after: 139447 / 165085
+num of vertices before/after: 140613 / 151177
+num of vertices before/after: 140613 / 165162
+230 555954
+Dice after registration: 0.9501692445278822
+Dice after registration: 0.967725019090184
+num of vertices before/after: 139301 / 150837
+num of vertices before/after: 139301 / 165976
+num of vertices before/after: 141283 / 151343
+num of vertices before/after: 141283 / 164833
+231 557857
+Dice after registration: 0.95445418803437
+Dice after registration: 0.9670765266694636
+num of vertices before/after: 142861 / 151495
+num of vertices before/after: 142861 / 164697
+ 82%|████████▏ | 232/283 [7:00:45<1:32:40, 109.03s/it] 82%|████████▏ | 233/283 [7:02:36<1:31:14, 109.49s/it] 83%|████████▎ | 234/283 [7:04:26<1:29:40, 109.80s/it] 83%|████████▎ | 235/283 [7:06:15<1:27:31, 109.41s/it] 83%|████████▎ | 236/283 [7:08:03<1:25:23, 109.01s/it] 84%|████████▎ | 237/283 [7:09:52<1:23:37, 109.07s/it] 84%|████████▍ | 238/283 [7:11:42<1:21:54, 109.22s/it] 84%|████████▍ | 239/283 [7:13:29<1:19:44, 108.74s/it] 85%|████████▍ | 240/283 [7:15:20<1:18:21, 109.33s/it] 85%|████████▌ | 241/283 [7:17:08<1:16:14, 108.91s/it] 86%|████████▌ | 242/283 [7:18:58<1:14:44, 109.37s/it] 86%|████████▌ | 243/283 [7:20:51<1:13:36, 110.41s/it] 86%|████████▌ | 244/283 [7:22:43<1:11:56, 110.69s/it] 87%|████████▋ | 245/283 [7:24:32<1:09:55, 110.40s/it] 87%|████████▋ | 246/283 [7:26:21<1:07:48, 109.96s/it] 87%|████████▋ | 247/283 [7:28:10<1:05:51, 109.77s/it] 88%|████████▊ | 248/283 [7:29:59<1:03:48, 109.39s/it] 88%|████████▊ | 249/283 [7:31:49<1:02:07, 109.63s/it] 88%|████████▊ | 250/283 [7:33:39<1:00:23, 109.80s/it] 89%|████████▊ | 251/283 [7:35:27<58:12, 109.14s/it]   89%|████████▉ | 252/283 [7:37:17<56:31, 109.39s/it] 89%|████████▉ | 253/283 [7:39:06<54:39, 109.30s/it] 90%|████████▉ | 254/283 [7:40:54<52:42, 109.03s/it] 90%|█████████ | 255/283 [7:42:43<50:47, 108.83s/it] 90%|█████████ | 256/283 [7:44:32<48:58, 108.84s/it] 91%|█████████ | 257/283 [7:46:18<46:53, 108.20s/it] 91%|█████████ | 258/283 [7:48:09<45:19, 108.79s/it] 92%|█████████▏| 259/283 [7:50:00<43:47, 109.48s/it] 92%|█████████▏| 260/283 [7:51:49<41:59, 109.56s/it]num of vertices before/after: 144391 / 151939
+num of vertices before/after: 144391 / 165230
+232 558657
+Dice after registration: 0.9574004078137827
+Dice after registration: 0.9651523167472905
+num of vertices before/after: 133229 / 152789
+num of vertices before/after: 133229 / 164956
+num of vertices before/after: 131433 / 153288
+num of vertices before/after: 131433 / 166404
+233 558960
+Dice after registration: 0.9627372993414675
+Dice after registration: 0.9660387285308374
+num of vertices before/after: 141744 / 152952
+num of vertices before/after: 141744 / 167287
+num of vertices before/after: 143385 / 153471
+num of vertices before/after: 143385 / 168433
+234 559457
+Dice after registration: 0.9552311831907511
+Dice after registration: 0.9650627468556542
+num of vertices before/after: 153995 / 151511
+num of vertices before/after: 153995 / 167330
+num of vertices before/after: 154745 / 151743
+num of vertices before/after: 154745 / 166743
+235 561242
+Dice after registration: 0.9609605058351596
+Dice after registration: 0.969322235763015
+num of vertices before/after: 132986 / 150656
+num of vertices before/after: 132986 / 163724
+num of vertices before/after: 130437 / 151102
+num of vertices before/after: 130437 / 163599
+236 561949
+Dice after registration: 0.9570020547397058
+Dice after registration: 0.9692156341393948
+num of vertices before/after: 145416 / 152776
+num of vertices before/after: 145416 / 166563
+num of vertices before/after: 145137 / 152132
+num of vertices before/after: 145137 / 166299
+237 562446
+Dice after registration: 0.956774104837879
+Dice after registration: 0.9683583333724733
+num of vertices before/after: 147207 / 152253
+num of vertices before/after: 147207 / 166955
+num of vertices before/after: 144990 / 151659
+num of vertices before/after: 144990 / 166061
+238 565452
+Dice after registration: 0.9613795590199065
+Dice after registration: 0.9668853615082067
+num of vertices before/after: 120455 / 151189
+num of vertices before/after: 120455 / 165191
+num of vertices before/after: 121010 / 151320
+num of vertices before/after: 121010 / 164823
+239 567759
+Dice after registration: 0.9620588306480042
+Dice after registration: 0.9653938465122739
+num of vertices before/after: 129992 / 152703
+num of vertices before/after: 129992 / 165845
+num of vertices before/after: 130426 / 152849
+num of vertices before/after: 130426 / 166475
+240 567961
+Dice after registration: 0.9616352305547374
+Dice after registration: 0.9675835799888193
+num of vertices before/after: 119346 / 152596
+num of vertices before/after: 119346 / 163664
+num of vertices before/after: 121114 / 152718
+num of vertices before/after: 121114 / 162975
+241 569965
+Dice after registration: 0.9613007124580216
+Dice after registration: 0.9658360157164756
+num of vertices before/after: 140751 / 153122
+num of vertices before/after: 140751 / 168723
+num of vertices before/after: 142740 / 153176
+num of vertices before/after: 142740 / 169674
+242 573249
+Dice after registration: 0.9617190801264294
+Dice after registration: 0.9654449348046229
+num of vertices before/after: 150974 / 152481
+num of vertices before/after: 150974 / 170041
+num of vertices before/after: 154522 / 152632
+num of vertices before/after: 154522 / 169563
+243 580650
+Dice after registration: 0.9605824199125383
+Dice after registration: 0.9693225831207928
+num of vertices before/after: 144474 / 152393
+num of vertices before/after: 144474 / 168137
+num of vertices before/after: 144999 / 152160
+num of vertices before/after: 144999 / 168046
+244 580751
+Dice after registration: 0.9517451288558453
+Dice after registration: 0.9615925053198915
+num of vertices before/after: 149379 / 152607
+num of vertices before/after: 149379 / 166919
+num of vertices before/after: 149309 / 152611
+num of vertices before/after: 149309 / 165518
+245 581450
+Dice after registration: 0.9534923145169723
+Dice after registration: 0.9648569220927742
+num of vertices before/after: 144483 / 151223
+num of vertices before/after: 144483 / 164396
+num of vertices before/after: 146459 / 151249
+num of vertices before/after: 146459 / 165396
+246 585862
+Dice after registration: 0.9550660147938795
+Dice after registration: 0.9650903411625948
+num of vertices before/after: 137663 / 151836
+num of vertices before/after: 137663 / 165328
+num of vertices before/after: 137629 / 151430
+num of vertices before/after: 137629 / 166026
+247 587664
+Dice after registration: 0.9659964788940132
+Dice after registration: 0.9673006325760143
+num of vertices before/after: 129546 / 151011
+num of vertices before/after: 129546 / 164970
+num of vertices before/after: 130298 / 151428
+num of vertices before/after: 130298 / 165802
+248 598568
+Dice after registration: 0.9584143500070423
+Dice after registration: 0.9662111856756096
+num of vertices before/after: 153161 / 154227
+num of vertices before/after: 153161 / 171436
+num of vertices before/after: 153214 / 154271
+num of vertices before/after: 153214 / 169618
+249 599065
+Dice after registration: 0.9592580969836016
+Dice after registration: 0.9635560818685175
+num of vertices before/after: 152777 / 152176
+num of vertices before/after: 152777 / 167225
+num of vertices before/after: 153088 / 151697
+num of vertices before/after: 153088 / 167608
+250 609143
+Dice after registration: 0.9578469187048474
+Dice after registration: 0.9686377618532075
+num of vertices before/after: 129806 / 152885
+num of vertices before/after: 129806 / 164186
+num of vertices before/after: 130867 / 152463
+num of vertices before/after: 130867 / 162837
+251 613235
+Dice after registration: 0.9596128928855066
+Dice after registration: 0.9655833713760199
+num of vertices before/after: 129658 / 153220
+num of vertices before/after: 129658 / 165277
+num of vertices before/after: 129243 / 152895
+num of vertices before/after: 129243 / 165182
+252 613538
+Dice after registration: 0.9600100669391783
+Dice after registration: 0.9683202930319533
+num of vertices before/after: 129041 / 152051
+num of vertices before/after: 129041 / 165543
+num of vertices before/after: 128228 / 152094
+num of vertices before/after: 128228 / 164072
+253 622236
+Dice after registration: 0.9593564789031717
+Dice after registration: 0.9661539203495845
+num of vertices before/after: 145604 / 152376
+num of vertices before/after: 145604 / 167056
+num of vertices before/after: 145557 / 152692
+num of vertices before/after: 145557 / 166915
+254 626648
+Dice after registration: 0.9554698112736204
+Dice after registration: 0.964948323718668
+num of vertices before/after: 136728 / 150304
+num of vertices before/after: 136728 / 165117
+num of vertices before/after: 139336 / 150852
+num of vertices before/after: 139336 / 165126
+255 826454
+Dice after registration: 0.9597236370795958
+Dice after registration: 0.9691998010578842
+num of vertices before/after: 141535 / 152895
+num of vertices before/after: 141535 / 167258
+num of vertices before/after: 142303 / 153650
+num of vertices before/after: 142303 / 167052
+256 844961
+Dice after registration: 0.9625922271194585
+Dice after registration: 0.9664462067912701
+num of vertices before/after: 128115 / 151135
+num of vertices before/after: 128115 / 162570
+num of vertices before/after: 128258 / 150651
+num of vertices before/after: 128258 / 162651
+257 849971
+Dice after registration: 0.9525146349553496
+Dice after registration: 0.9676806390358651
+num of vertices before/after: 146090 / 151743
+num of vertices before/after: 146090 / 166774
+num of vertices before/after: 146921 / 151365
+num of vertices before/after: 146921 / 165860
+258 856766
+Dice after registration: 0.952638753319502
+Dice after registration: 0.9674306234095688
+num of vertices before/after: 129859 / 152150
+num of vertices before/after: 129859 / 168306
+num of vertices before/after: 127633 / 153052
+num of vertices before/after: 127633 / 167736
+259 867468
+Dice after registration: 0.955671964975476
+Dice after registration: 0.966272757227868
+num of vertices before/after: 139369 / 156260
+num of vertices before/after: 139369 / 166515
+num of vertices before/after: 140448 / 155440
+num of vertices before/after: 140448 / 167163
+260 871964
+Dice after registration: 0.9567250989094186
+Dice after registration: 0.9665706433440504
+num of vertices before/after: 160585 / 155753
+ 92%|█████████▏| 261/283 [7:53:39<40:13, 109.71s/it] 93%|█████████▎| 262/283 [7:55:28<38:16, 109.34s/it] 93%|█████████▎| 263/283 [7:57:18<36:30, 109.52s/it] 93%|█████████▎| 264/283 [7:59:06<34:30, 109.00s/it] 94%|█████████▎| 265/283 [8:00:54<32:36, 108.71s/it] 94%|█████████▍| 266/283 [8:02:40<30:36, 108.00s/it] 94%|█████████▍| 267/283 [8:04:29<28:54, 108.43s/it] 95%|█████████▍| 268/283 [8:06:19<27:12, 108.83s/it] 95%|█████████▌| 269/283 [8:08:07<25:19, 108.55s/it] 95%|█████████▌| 270/283 [8:09:56<23:33, 108.74s/it] 96%|█████████▌| 271/283 [8:11:45<21:44, 108.75s/it] 96%|█████████▌| 272/283 [8:13:35<19:59, 109.05s/it] 96%|█████████▋| 273/283 [8:15:22<18:06, 108.62s/it] 97%|█████████▋| 274/283 [8:17:14<16:25, 109.50s/it] 97%|█████████▋| 275/283 [8:19:00<14:28, 108.52s/it] 98%|█████████▊| 276/283 [8:20:48<12:38, 108.36s/it] 98%|█████████▊| 277/283 [8:22:33<10:43, 107.32s/it] 98%|█████████▊| 278/283 [8:24:17<08:51, 106.33s/it] 99%|█████████▊| 279/283 [8:26:02<07:03, 105.92s/it] 99%|█████████▉| 280/283 [8:27:51<05:20, 106.75s/it] 99%|█████████▉| 281/283 [8:29:37<03:33, 106.58s/it]100%|█████████▉| 282/283 [8:31:21<01:45, 105.95s/it]100%|██████████| 283/283 [8:33:08<00:00, 106.21s/it]100%|██████████| 283/283 [8:33:08<00:00, 108.79s/it]
+num of vertices before/after: 160585 / 170406
+num of vertices before/after: 160678 / 155575
+num of vertices before/after: 160678 / 170217
+261 872562
+Dice after registration: 0.955934239968071
+Dice after registration: 0.9634611066281299
+num of vertices before/after: 151832 / 151980
+num of vertices before/after: 151832 / 166314
+num of vertices before/after: 153409 / 152083
+num of vertices before/after: 153409 / 167613
+262 873968
+Dice after registration: 0.9595205100962421
+Dice after registration: 0.9679384806925058
+num of vertices before/after: 129110 / 152376
+num of vertices before/after: 129110 / 165068
+num of vertices before/after: 127042 / 152414
+num of vertices before/after: 127042 / 164379
+263 877269
+Dice after registration: 0.9614666473922999
+Dice after registration: 0.9661101101546588
+num of vertices before/after: 110588 / 151242
+num of vertices before/after: 110588 / 162171
+num of vertices before/after: 109978 / 150937
+num of vertices before/after: 109978 / 160716
+264 884064
+Dice after registration: 0.9537476571264702
+Dice after registration: 0.9650411074599549
+num of vertices before/after: 137508 / 153427
+num of vertices before/after: 137508 / 165631
+num of vertices before/after: 136233 / 153387
+num of vertices before/after: 136233 / 165705
+265 885975
+Dice after registration: 0.9500691196621435
+Dice after registration: 0.9643852125640029
+num of vertices before/after: 133434 / 151372
+num of vertices before/after: 133434 / 162198
+num of vertices before/after: 136204 / 150705
+num of vertices before/after: 136204 / 161500
+266 889579
+Dice after registration: 0.956518899997644
+Dice after registration: 0.9650860116466318
+num of vertices before/after: 162502 / 152686
+num of vertices before/after: 162502 / 169166
+num of vertices before/after: 163288 / 152802
+num of vertices before/after: 163288 / 173069
+267 894067
+Dice after registration: 0.9561806115569538
+Dice after registration: 0.9648220361675669
+num of vertices before/after: 156793 / 155560
+num of vertices before/after: 156793 / 169541
+num of vertices before/after: 157834 / 153732
+num of vertices before/after: 157834 / 168635
+268 894673
+Dice after registration: 0.9617629958419232
+Dice after registration: 0.9660944620201989
+num of vertices before/after: 142792 / 151769
+num of vertices before/after: 142792 / 166605
+num of vertices before/after: 140432 / 151971
+num of vertices before/after: 140432 / 168027
+269 894774
+Dice after registration: 0.9552262845826192
+Dice after registration: 0.9660138228736579
+num of vertices before/after: 149603 / 151912
+num of vertices before/after: 149603 / 167645
+num of vertices before/after: 149271 / 151507
+num of vertices before/after: 149271 / 169134
+270 896778
+Dice after registration: 0.9492839395301709
+Dice after registration: 0.9630155357437473
+num of vertices before/after: 135602 / 152499
+num of vertices before/after: 135602 / 162960
+num of vertices before/after: 135126 / 152926
+num of vertices before/after: 135126 / 165778
+271 898176
+Dice after registration: 0.9571196488414287
+Dice after registration: 0.9655075702377923
+num of vertices before/after: 150005 / 153081
+num of vertices before/after: 150005 / 169315
+num of vertices before/after: 151596 / 153381
+num of vertices before/after: 151596 / 168790
+272 899885
+Dice after registration: 0.9586105752281762
+Dice after registration: 0.9680447671205128
+num of vertices before/after: 129767 / 150702
+num of vertices before/after: 129767 / 163264
+num of vertices before/after: 130823 / 150643
+num of vertices before/after: 130823 / 163799
+273 901139
+Dice after registration: 0.9608416999211166
+Dice after registration: 0.9672261489629439
+num of vertices before/after: 141722 / 151614
+num of vertices before/after: 141722 / 166102
+num of vertices before/after: 140470 / 151272
+num of vertices before/after: 140470 / 165829
+274 907656
+Dice after registration: 0.963325888485088
+Dice after registration: 0.9652771520604881
+num of vertices before/after: 108992 / 150650
+num of vertices before/after: 108992 / 160975
+num of vertices before/after: 109816 / 150631
+num of vertices before/after: 109816 / 160376
+275 908860
+Dice after registration: 0.9491860953707744
+Dice after registration: 0.9635386772137382
+num of vertices before/after: 159110 / 152931
+num of vertices before/after: 159110 / 167652
+num of vertices before/after: 160239 / 152595
+num of vertices before/after: 160239 / 169679
+276 910443
+Dice after registration: 0.9456709784197778
+Dice after registration: 0.9637294992250641
+num of vertices before/after: 141100 / 153424
+num of vertices before/after: 141100 / 165281
+num of vertices before/after: 142467 / 152781
+num of vertices before/after: 142467 / 165526
+277 929464
+Dice after registration: 0.9570210340448928
+Dice after registration: 0.9672149378148823
+num of vertices before/after: 126055 / 150819
+num of vertices before/after: 126055 / 162282
+num of vertices before/after: 124573 / 151267
+num of vertices before/after: 124573 / 162675
+278 962058
+Dice after registration: 0.9576401375950208
+Dice after registration: 0.9672262451090036
+num of vertices before/after: 150142 / 153901
+num of vertices before/after: 150142 / 168278
+num of vertices before/after: 150598 / 153461
+num of vertices before/after: 150598 / 168408
+279 965771
+Dice after registration: 0.9578115293871997
+Dice after registration: 0.9683656543381043
+num of vertices before/after: 157981 / 156414
+num of vertices before/after: 157981 / 171371
+num of vertices before/after: 160842 / 156091
+num of vertices before/after: 160842 / 172440
+280 966975
+Dice after registration: 0.9567331054341437
+Dice after registration: 0.9659252785819912
+num of vertices before/after: 153626 / 152335
+num of vertices before/after: 153626 / 170638
+num of vertices before/after: 153119 / 152251
+num of vertices before/after: 153119 / 169945
+281 971160
+Dice after registration: 0.9583430633344082
+Dice after registration: 0.9675391375763361
+num of vertices before/after: 151923 / 151436
+num of vertices before/after: 151923 / 164480
+num of vertices before/after: 152431 / 151446
+num of vertices before/after: 152431 / 166954
+282 996782
+Dice after registration: 0.9605956858097286
+Dice after registration: 0.9676378599560811
+num of vertices before/after: 155469 / 153762
+num of vertices before/after: 155469 / 169892
+num of vertices before/after: 157827 / 154012
+num of vertices before/after: 157827 / 170089
