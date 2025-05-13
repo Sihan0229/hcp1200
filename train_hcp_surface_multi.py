@@ -40,7 +40,7 @@ class SurfDataset(Dataset):
         self.sigma = args.sigma
 
         # ------ 获取数据路径列表 ------
-        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/{data_split}/*'))
+        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_cut_split/{data_split}/*'))
         
         # ------ 加载模板数据 ------
         file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -83,11 +83,11 @@ class SurfDataset(Dataset):
         subj_dir = self.subj_dirs[idx]
         subj_id = os.path.basename(subj_dir)
         
-        # ------ 惰性加载体积数据 ------
-        vol_in = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
-        affine_in = vol_in.affine
-        vol_data = vol_in.get_fdata()
-        vol_data = (vol_data / vol_data.max()).astype(np.float32)  # 原始数据 [H,W,D]
+        # # ------ 惰性加载体积数据 ------
+        # vol_in = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
+        # affine_in = vol_in.affine
+        # vol_data = vol_in.get_fdata()
+        # vol_data = (vol_data / vol_data.max()).astype(np.float32)  # 原始数据 [H,W,D]
         
         # # ------ 执行插值 ------
         # vol_data = torch.from_numpy(vol_data / vol_data.max()).float().unsqueeze(0)  # [1,H,W,D]
@@ -104,12 +104,34 @@ class SurfDataset(Dataset):
         #     header=vol_in.header  # 复制原始header
         # )
 
-        # 裁剪半球
-        if self.surf_hemi == 'left':
-            vol_data = vol_data[None, 96:]
-        elif self.surf_hemi == 'right':
-            vol_data = vol_data[None, :160]
+        # # 裁剪半球
+        # if self.surf_hemi == 'left':
+        #     vol_data = vol_data[None, 96:]
+        # elif self.surf_hemi == 'right':
+        #     vol_data = vol_data[None, :160]
         
+        # ------ 惰性加载体积数据（T2w + T1w）------
+        t2_img = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
+        affine_in = t2_img.affine
+        t2_data = t2_img.get_fdata()
+        t2_data = (t2_data / t2_data.max()).astype(np.float32)
+
+        t1_img = nib.load(os.path.join(subj_dir, 'T1w_proc_affine.nii.gz'))
+        t1_data = t1_img.get_fdata()
+        t1_data = (t1_data / t1_data.max()).astype(np.float32)
+
+        # 裁剪半球（分别对 T1w/T2w）
+        if self.surf_hemi == 'left':
+            t2_data = t2_data[96:]
+            t1_data = t1_data[96:]
+        elif self.surf_hemi == 'right':
+            t2_data = t2_data[:160]
+            t1_data = t1_data[:160]
+
+        # 合并为 2 通道体积 [2, H, W, D]
+        vol_data = np.stack([t1_data, t2_data], axis=0)  # [2, H, W, D]
+
+
         # ------ 处理表面数据 ------
         vert_in = self.vert_temp.copy().astype(np.float32)
         face_in = self.face_temp.copy()
@@ -167,7 +189,7 @@ def train_loop(args):
     #     format='%(asctime)s %(message)s')
     
     logging.basicConfig( 
-    filename='/root/autodl-tmp/hcp1200/surface/ckpts_all/log_hemi-' + surf_hemi + '_' + 
+    filename='/root/autodl-tmp/hcp1200/surface/ckpts_10_multi/log_hemi-' + surf_hemi + '_' + 
              surf_type + '_' + tag + '.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s')
@@ -212,7 +234,7 @@ def train_loop(args):
     #     C_hid=C_hid, C_in=1, inshape=[112,224,160],
     #     sigma=sigma, device=device)
     nn_surf = SurfDeform(
-        C_hid=C_hid, C_in=1, inshape=[160,304,256],
+        C_hid=C_hid, C_in=2, inshape=[160,304,256],
         sigma=sigma, device=device)
     optimizer = optim.Adam(nn_surf.parameters(), lr=lr)
 
@@ -286,7 +308,7 @@ def train_loop(args):
         
             # save model checkpoints
             torch.save(nn_surf.state_dict(),
-                       '/root/autodl-tmp/hcp1200/surface/ckpts_all/model_hemi-'+surf_hemi+'_'+\
+                       '/root/autodl-tmp/hcp1200/surface/ckpts_10_multi/model_hemi-'+surf_hemi+'_'+\
                        surf_type+'_'+tag+'_'+str(epoch)+'epochs.pt')
 
 
@@ -297,7 +319,7 @@ if __name__ == "__main__":
     parser.add_argument('--surf_type', default='wm', type=str, help="[wm, pial]")
     parser.add_argument('--surf_hemi', default='left', type=str, help="[left, right]")
     parser.add_argument('--device', default="cuda", type=str, help="[cuda, cpu]")
-    parser.add_argument('--tag', default='0002', type=str, help="identity for experiments")
+    parser.add_argument('--tag', default='0001', type=str, help="identity for experiments")
 
     # parser.add_argument('--lr', default=1e-4, type=float, help="learning rate")
     # parser.add_argument('--n_epoch', default=200, type=int, help="number of training epochs")

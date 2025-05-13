@@ -40,7 +40,7 @@ class SurfDataset(Dataset):
         self.sigma = args.sigma
 
         # ------ 获取数据路径列表 ------
-        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/{data_split}/*'))
+        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_cut_split/{data_split}/*'))
         
         # ------ 加载模板数据 ------
         file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -147,7 +147,53 @@ class SurfDataset(Dataset):
             vert_gt[:, 0] -= 96
             
         return (vol_data, vert_in, vert_gt, face_in, face_gt)
-    
+
+def build_vertex_adjacency_matrix(faces, num_vertices):
+    """
+    构建 vertex 邻接稀疏矩阵COO 格式, faces 为 (F, 3) LongTensor
+    """
+    # faces: (F, 3)
+    i0, i1, i2 = faces[:, 0], faces[:, 1], faces[:, 2]
+    # 无向图：每个三角形边双向添加
+    row = torch.cat([i0, i1, i2, i1, i2, i0])
+    col = torch.cat([i1, i2, i0, i0, i1, i2])
+    # 去除重复边（可选）
+    idx = row * num_vertices + col
+    unique, unique_idx = torch.unique(idx, return_index=True)
+    row = row[unique_idx]
+    col = col[unique_idx]
+    # 返回 (2, E) 的边索引（edge_index）格式
+    edge_index = torch.stack([row, col], dim=0)
+    return edge_index
+
+def curvature_loss_batch(verts, edge_index):
+    """
+    verts: (B, V, 3)
+    edge_index: (2, E) 邻接边索引torch.LongTensor
+    """
+    B, V, C = verts.shape
+    device = verts.device
+
+    src = edge_index[0]  # from vertex
+    dst = edge_index[1]  # to neighbor vertex
+
+    # 获取每条边对应的顶点坐标
+    v_src = verts[:, src]  # (B, E, 3)
+    v_dst = verts[:, dst]  # (B, E, 3)
+
+    # 对每个顶点聚合邻居平均值（稀疏邻接 -> 稠密平均）
+    vert_sum = torch.zeros((B, V, C), device=device)
+    vert_count = torch.zeros((1, V, 1), device=device)  # 不需要 batch 维度
+
+    vert_sum.scatter_add_(1, dst.unsqueeze(0).unsqueeze(-1).expand(B, -1, C), v_src)
+    vert_count.scatter_add_(1, dst.unsqueeze(0).unsqueeze(-1), torch.ones_like(v_src[:, :, :1]))
+
+    mean_neighbor = vert_sum / (vert_count + 1e-6)
+    loss = ((verts - mean_neighbor) ** 2).sum(-1)  # (B, V)
+    return loss.mean()
+
+
+
 def train_loop(args):
     # ------ load arguments ------ 
     surf_type = args.surf_type  # wm or pial
@@ -159,6 +205,7 @@ def train_loop(args):
     sigma = args.sigma  # std for gaussian filter
     w_nc = args.w_nc  # weight for nc loss
     w_edge = args.w_edge  # weight for edge loss
+    w_curv = args.w_curv  # weight for edge loss
     
     # start training logging
     # logging.basicConfig(
@@ -167,7 +214,7 @@ def train_loop(args):
     #     format='%(asctime)s %(message)s')
     
     logging.basicConfig( 
-    filename='/root/autodl-tmp/hcp1200/surface/ckpts_all/log_hemi-' + surf_hemi + '_' + 
+    filename='/root/autodl-tmp/hcp1200/surface/ckpts_10_curve/log_hemi-' + surf_hemi + '_' + 
              surf_type + '_' + tag + '.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s')
@@ -218,6 +265,7 @@ def train_loop(args):
 
     # ------ training loop ------ 
     logging.info("start training ...")
+    edge_index = None
     for epoch in tqdm(range(n_epoch+1)):
         avg_loss = []
         for idx, data in enumerate(trainloader):
@@ -227,6 +275,12 @@ def train_loop(args):
             face_in = face_in.to(device).long()
             vert_gt = vert_gt.to(device).float()
             face_gt = face_gt.to(device).long()
+                
+            if edge_index is None:
+                # 假设每个 batch 只包含一个样本（或 face 拓扑一致）
+                edge_index = build_vertex_adjacency_matrix(face_in[0].cpu(), vert_in.shape[1])
+                edge_index = edge_index.to(device)
+
             optimizer.zero_grad()
             vert_pred = nn_surf(vert_in, vol_in, n_steps=7) # TODO
 
@@ -239,7 +293,9 @@ def train_loop(args):
             edge_loss = ((vert_i - vert_j)**2).sum(-1).mean() 
             # reconstruction loss
             recon_loss = chamfer_distance(vert_pred, vert_gt)[0]
-            loss = recon_loss + w_nc*nc_loss + w_edge*edge_loss
+            curv_loss = curvature_loss_batch(vert_pred, edge_index)
+            
+            loss = recon_loss + w_nc*nc_loss + w_edge*edge_loss + w_curv*curv_loss
 
             avg_loss.append(loss.item())
             loss.backward()
@@ -277,16 +333,22 @@ def train_loop(args):
                     edge_loss = ((vert_i - vert_j)**2).sum(-1).mean() 
                     edge_error.append(edge_loss.item())
 
+                    curv_loss = curvature_loss_batch(vert_pred, edge_index)
+                    curv_error.append(curv_loss.item())
+
+
             logging.info('epoch:{}'.format(epoch))
             logging.info('recon error:{}'.format(np.mean(recon_error)))
             logging.info('nc error:{}'.format(np.mean(nc_error)))
             logging.info('edge error:{}'.format(np.mean(edge_error)))
+            logging.info('curv error:{}'.format(np.mean(curv_error)))
+
 
             logging.info('-------------------------------------')
         
             # save model checkpoints
             torch.save(nn_surf.state_dict(),
-                       '/root/autodl-tmp/hcp1200/surface/ckpts_all/model_hemi-'+surf_hemi+'_'+\
+                       '/root/autodl-tmp/hcp1200/surface/ckpts_10_curve/model_hemi-'+surf_hemi+'_'+\
                        surf_type+'_'+tag+'_'+str(epoch)+'epochs.pt')
 
 
@@ -310,7 +372,9 @@ if __name__ == "__main__":
     parser.add_argument('--sigma', default=0.7, type=float, help="standard deviation for gaussian smooth") # TODO # 减少平滑以保留颞叶、顶叶等区域的细微褶皱
     parser.add_argument('--w_nc', default=3.0, type=float, help="weight for normal consistency loss") # TODO # 降低对平滑的强约束
     parser.add_argument('--w_edge', default=0.3, type=float, help="weight for edge length loss") # TODO # 增强边缘保持（成人皮质更薄）
+    parser.add_argument('--w_curv', default=0.1, type=float, help="weight for curv loss") # TODO # 增强边缘保持（成人皮质更薄）
     
     args = parser.parse_args()
+    
     
     train_loop(args)
