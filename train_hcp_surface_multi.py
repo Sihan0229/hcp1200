@@ -199,8 +199,8 @@ def train_loop(args):
     trainset = SurfDataset(args, data_split='train')
     validset = SurfDataset(args, data_split='valid')
 
-    trainloader = DataLoader(trainset, batch_size=1, shuffle=True)
-    validloader = DataLoader(validset, batch_size=1, shuffle=False)
+    trainloader = DataLoader(trainset, batch_size=1, shuffle=True, num_workers=16)
+    validloader = DataLoader(validset, batch_size=1, shuffle=False, num_workers=16)
     
     # ------ pre-compute adjacency------
     file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -239,9 +239,11 @@ def train_loop(args):
     optimizer = optim.Adam(nn_surf.parameters(), lr=lr)
 
     # ------ training loop ------ 
+    accumulation_steps = 4  # 例如，每4步更新一次梯度
     logging.info("start training ...")
     for epoch in tqdm(range(n_epoch+1)):
         avg_loss = []
+        optimizer.zero_grad()  # 初始化放到外面
         for idx, data in enumerate(trainloader):
             vol_in, vert_in, vert_gt, face_in, face_gt = data
             vol_in = vol_in.to(device).float()
@@ -249,7 +251,7 @@ def train_loop(args):
             face_in = face_in.to(device).long()
             vert_gt = vert_gt.to(device).float()
             face_gt = face_gt.to(device).long()
-            optimizer.zero_grad()
+            # optimizer.zero_grad()
             vert_pred = nn_surf(vert_in, vol_in, n_steps=7) # TODO
 
             # normal consistency loss
@@ -262,10 +264,18 @@ def train_loop(args):
             # reconstruction loss
             recon_loss = chamfer_distance(vert_pred, vert_gt)[0]
             loss = recon_loss + w_nc*nc_loss + w_edge*edge_loss
+            loss = loss / accumulation_steps  # 注意缩放 loss
 
-            avg_loss.append(loss.item())
+            # avg_loss.append(loss.item())
+            
             loss.backward()
-            optimizer.step()
+
+            avg_loss.append(loss.item() * accumulation_steps)  # 乘回来表示真实 loss
+
+            if (idx + 1) % accumulation_steps == 0 or (idx + 1) == len(trainloader):
+                optimizer.step()
+                optimizer.zero_grad()
+            # optimizer.step()
             # print(f'sample {idx}: loss = {loss.item()}, average loss = {np.mean(avg_loss)}')
        
         logging.info("epoch:{}, loss:{}".format(epoch, np.mean(avg_loss)))

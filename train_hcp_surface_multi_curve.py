@@ -185,8 +185,8 @@ def train_loop(args):
     trainset = SurfDataset(args, data_split='train')
     validset = SurfDataset(args, data_split='valid')
 
-    trainloader = DataLoader(trainset, batch_size=1, shuffle=True)
-    validloader = DataLoader(validset, batch_size=1, shuffle=False)
+    trainloader = DataLoader(trainset, batch_size=1, shuffle=True, num_workers=16)
+    validloader = DataLoader(validset, batch_size=1, shuffle=False, num_workers=16)
     
     # ------ pre-compute adjacency------
     file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -224,10 +224,12 @@ def train_loop(args):
         sigma=sigma, device=device)
     optimizer = optim.Adam(nn_surf.parameters(), lr=lr)
 
+    accumulation_steps = 4
     # ------ training loop ------ 
     logging.info("start training ...")
     for epoch in tqdm(range(n_epoch+1)):
         avg_loss = []
+        optimizer.zero_grad()  # 初始化放到外面
         for idx, data in enumerate(trainloader):
             vol_in, vert_in, vert_gt, face_in, face_gt, curv_gt = data
             vol_in = vol_in.to(device).float()
