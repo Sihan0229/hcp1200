@@ -40,8 +40,24 @@ class SurfDataset(Dataset):
         self.sigma = args.sigma
 
         # ------ 获取数据路径列表 ------
-        self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/{data_split}/*'))
+        # self.subj_dirs = sorted(glob.glob(f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/{data_split}/*'))
         
+        logging.info("load dataset ...")
+
+        if data_split == 'train':
+            fold_ids = [0, 1, 2, 3]  # 合并4个fold作为训练集
+        elif data_split == 'valid':
+            fold_ids = [4]  # 单独1个fold作为验证集
+        else:
+            raise ValueError(f"Unsupported data_split: {data_split}")
+
+        self.subj_dirs = []
+        for fold_id in fold_ids:
+            fold_path = f'/root/autodl-tmp/hcp1200_dataset/HCP1200_split/train_valid/fold_{fold_id}/*'
+            self.subj_dirs.extend(sorted(glob.glob(fold_path)))
+
+        logging.info(f"Loaded {len(self.subj_dirs)} samples from folds {fold_ids} for {data_split} set.")
+
         # ------ 加载模板数据 ------
         file_dir = os.path.dirname(os.path.abspath(__file__))
         template_dir = os.path.join(file_dir, '/root/autodl-tmp/hcp1200/template_hcp1200/')
@@ -83,32 +99,6 @@ class SurfDataset(Dataset):
         subj_dir = self.subj_dirs[idx]
         subj_id = os.path.basename(subj_dir)
         
-        # # ------ 惰性加载体积数据 ------
-        # vol_in = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
-        # affine_in = vol_in.affine
-        # vol_data = vol_in.get_fdata()
-        # vol_data = (vol_data / vol_data.max()).astype(np.float32)  # 原始数据 [H,W,D]
-        
-        # # ------ 执行插值 ------
-        # vol_data = torch.from_numpy(vol_data / vol_data.max()).float().unsqueeze(0)  # [1,H,W,D]
-        # vol_data = F.interpolate(
-        #     vol_data.unsqueeze(0),  # [1,1,H,W,D]
-        #     size=[256, 304, 256],
-        #     mode='trilinear'
-        # ).squeeze(0).squeeze(0).numpy()  # [256,304,256]
-
-        # # ------ 将插值结果保存回vol_in ------
-        # vol_in = nib.Nifti1Image(
-        #     vol_data,  # 插值后的数据
-        #     affine_in,  # 保持原始affine矩阵 # TODO
-        #     header=vol_in.header  # 复制原始header
-        # )
-
-        # # 裁剪半球
-        # if self.surf_hemi == 'left':
-        #     vol_data = vol_data[None, 96:]
-        # elif self.surf_hemi == 'right':
-        #     vol_data = vol_data[None, :160]
         
         # ------ 惰性加载体积数据（T2w + T1w）------
         t2_img = nib.load(os.path.join(subj_dir, 'T2w_proc_affine.nii.gz'))
@@ -189,7 +179,7 @@ def train_loop(args):
     #     format='%(asctime)s %(message)s')
     
     logging.basicConfig( 
-    filename='/root/autodl-tmp/hcp1200/surface/ckpts_all_multi/log_hemi-' + surf_hemi + '_' + 
+    filename='/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/log_hemi-' + surf_hemi + '_' + 
              surf_type + '_' + tag + '.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s')
@@ -318,7 +308,7 @@ def train_loop(args):
         
             # save model checkpoints
             torch.save(nn_surf.state_dict(),
-                       '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi/model_hemi-'+surf_hemi+'_'+\
+                       '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-'+surf_hemi+'_'+\
                        surf_type+'_'+tag+'_'+str(epoch)+'epochs.pt')
 
 
