@@ -44,7 +44,7 @@ def plot_losses(train_losses, val_losses, save_path='loss_curve.png'):
     plt.plot(epochs_val, losses_val, label='Validation Loss', color='red', marker='o', linestyle='--')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
-    plt.title('Training and Validation Loss Over Epochs (T2w 10)')
+    plt.title('Training and Validation Loss Over Epochs (T1 + T2w)')
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
@@ -53,8 +53,8 @@ def plot_losses(train_losses, val_losses, save_path='loss_curve.png'):
     print(f"Saved loss plot to: {save_path}")
 
 # 用法
-log_file_path = '/root/autodl-tmp/hcp1200/surface/ckpts_10/log_hemi-left_wm_0001.log'
-save_img_path = '//root/autodl-tmp/hcp1200/surface/ckpts_10/log_hemi-left_wm_0001.png'
+log_file_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/log_hemi-left_wm_0001.log'
+save_img_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/log_hemi-left_wm_0001.png'
 
 train_losses, val_losses = parse_log_file(log_file_path)
 plot_losses(train_losses, val_losses, save_path=save_img_path)
