@@ -77,7 +77,7 @@ class SurfDataset(Dataset):
         self.nn_surf = None
         if self.surf_type == 'pial':
             self.nn_surf = SurfDeform(
-                C_hid=[8,16,32,64,128,128], C_in=1,
+                C_hid=[8,16,32,32,32,32], C_in=2,
                 inshape=[160,304,256], sigma=self.sigma, device=self.device)
             model_path = f'/root/dhcp/train/surface/ckpts/model_hemi-left_wm_0004_100epochs.pt'
             self.nn_surf.load_state_dict(torch.load(model_path, map_location=self.device))

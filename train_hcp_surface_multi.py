@@ -89,7 +89,7 @@ class SurfDataset(Dataset):
             self.nn_surf = SurfDeform(
                 C_hid=[8,16,32,64,128,128], C_in=1,
                 inshape=[160,304,256], sigma=self.sigma, device=self.device)
-            model_path = f'/root/dhcp/train/surface/ckpts/model_hemi-left_wm_0004_100epochs.pt'
+            model_path = f'/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_280epochs_multi_51_best.pt'
             self.nn_surf.load_state_dict(torch.load(model_path, map_location=self.device))
 
     def __len__(self):
@@ -317,7 +317,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Surface Recon")
     
     parser.add_argument('--surf_type', default='wm', type=str, help="[wm, pial]")
-    parser.add_argument('--surf_hemi', default='left', type=str, help="[left, right]")
+    parser.add_argument('--surf_hemi', default='right', type=str, help="[left, right]")
     parser.add_argument('--device', default="cuda", type=str, help="[cuda, cpu]")
     parser.add_argument('--tag', default='0001', type=str, help="identity for experiments")
 
