@@ -1,0 +1,19 @@
+========================================
+Start processing subject: 199352
+----------------------------------------
+Surface reconstruction (left) starts ...
+Chamfer loss for wm surface: 0.9139063358306885
+Surface reconstruction (left) ends. Runtime: 0.6417 sec.
+----------------------------------------
+Feature estimation (left) starts ...
+Estimate cortical thickness ... Done.
+Estimate curvature ... Done.
+Estimate sulcal depth ... Done.
+Cortical Feature Estimation ends. Runtime: 1.6292 sec.
+----------------------------------------
+Surface inflation (left) starts ...
+Surface inflation (left) ends. Runtime: 0.8473 sec.
+----------------------------------------
+Finished. Total runtime: 4.4503 sec.
+========================================
+Chamfer Loss - Max: 1.078488826751709, Min: 0.8013120889663696, Mean: 0.9374882043624411, Std: 0.06551868685061636

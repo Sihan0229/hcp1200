@@ -13,7 +13,9 @@ import torch.nn.functional as F
 
 import ants
 from ants.utils.bias_correction import n4_bias_field_correction
-
+from pytorch3d.loss import chamfer_distance
+from pytorch3d.structures import Meshes
+from pytorch3d.structures import Pointclouds
 from seg.unet import UNet
 from surface.net import SurfDeform
 from sphere.net.sunet import SphereDeform
@@ -58,9 +60,9 @@ parser = argparse.ArgumentParser(description="dHCP DL Neonatal Pipeline")
 #                     help='Diectory containing input images.')
 # parser.add_argument('--out_dir', default='/root/autodl-tmp/output/test/', type=str,
 #                     help='Directory for saving the output of the pipeline.')
-parser.add_argument('--in_dir', default='/root/autodl-tmp/dhcp/sample_test/input/', type=str, # TODO
+parser.add_argument('--in_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_split/test/', type=str, # TODO
                     help='Diectory containing input images.')
-parser.add_argument('--out_dir', default='/root/autodl-tmp/dhcp/sample_test/output/', type=str, # TODO
+parser.add_argument('--out_dir', default='/root/autodl-tmp/hcp1200/sample_test/output/', type=str, # TODO
                     help='Directory for saving the output of the pipeline.')
 parser.add_argument('--T2', default='T2w_proc_affine.nii.gz', type=str,
                     help='Suffix of T2 image file.')
@@ -109,7 +111,7 @@ nn_surf_right_pial = SurfDeform( # done
     C_hid=[8,16,32,32,32,32], C_in=1, inshape=[160,304,256], sigma=1.0, device=device)
 
 nn_surf_left_wm.load_state_dict( # training
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_280epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_220epochs.pt', map_location=device))
 nn_surf_right_wm.load_state_dict(
     torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-right_wm_0001_290epochs.pt', map_location=device))
 nn_surf_left_pial.load_state_dict(
@@ -147,6 +149,7 @@ vert_right_in = torch.Tensor(vert_right_in[None]).to(device)
 face_right_in = torch.LongTensor(face_right_in[None]).to(device)
 
 
+
 # ============ HCP DL-based neonatal pipeline ============
 if __name__ == '__main__':
     total_surf_time = 0.0
@@ -156,6 +159,7 @@ if __name__ == '__main__':
     t_surf = 0
     t_feature = 0
     t_inflate = 0
+    chamfer_losses = []
     start_time = time.time()
     subj_list = sorted(glob.glob(in_dir + '**/*' + t2_suffix, recursive=True))
     for subj_t2_dir in tqdm(subj_list): # switch to t2
@@ -196,6 +200,19 @@ if __name__ == '__main__':
         # 合并为 2 通道体积，并调整维度顺序
         vol_data = np.stack([t1_data, t2_data], axis=0)  # [2, H, W, D]
         vol_in = torch.tensor(vol_data).unsqueeze(0).float().to(device)  # [1, 2, H, W, D]
+
+        # surf_file = os.path.join(in_dir, subj_id, subj_id + '.L.white.native_160k.surf.gii')
+        # if os.path.exists(surf_file):
+        #     surface_wm_gt = nib.load(surf_file)
+        #     vert_data_wm_gt = surface_wm_gt.darrays[0].data  # 获取顶点数据
+        #     face_data_wm_gt = surface_wm_gt.darrays[1].data  # 获取面数据
+
+        #     # 这里可以继续处理表面数据
+        #     # 例如：将顶点数据转为PyTorch张量
+        #     vert_tensor_wm_gt = torch.tensor(vert_data_wm_gt).float().to(device)
+        #     face_tensor_wm_gt = torch.tensor(face_data_wm_gt).long().to(device)
+        # else:
+        #     logger.warning(f"Surface file not found for subject {subj_id}")
         
         # print('vol_data.shape:', vol_data.shape)
 
@@ -229,9 +246,43 @@ if __name__ == '__main__':
 
             # wm and pial surfaces reconstruction
             with torch.no_grad():
+                # 读取地面真值（GT）表面
+                subj_dir = in_dir + subj_id
+                surf_gt = nib.load(os.path.join(subj_dir, f"{subj_id}.L.white.native_160k.surf.gii"))
+                
+                # 获取地面真值顶点和面数据
+                vert_gt = surf_gt.agg_data('pointset')
+                face_gt = surf_gt.agg_data('triangle')[:, [2, 1, 0]]
+
+                # 将顶点应用仿射变换
+                vert_gt = apply_affine_mat(vert_gt, np.linalg.inv(affine_in)).astype(np.float32)
+
+                # 对左半球的顶点进行平移
+                if surf_hemi == 'left':
+                    vert_gt[:, 0] -= 96  # 这里的 96 是根据具体的实验调整
+
+                # 转换为 PyTorch 张量
+                vert_gt_tensor = torch.tensor(vert_gt).float().to(device)
+                face_gt_tensor = torch.tensor(face_gt).long().to(device)
+                
                 vert_wm = nn_surf_wm(vert_in, vol_in, n_steps=7) # TODO
                 vert_wm = taubin_smooth(vert_wm, face_in, n_iters=5) # TODO
                 vert_pial = nn_surf_pial(vert_wm, vol_in, n_steps=7) # TODO
+                vert_wm_pred_tensor = torch.tensor(vert_wm[0].cpu().numpy()).float().to(device)
+
+                pointcloud_pred = Pointclouds(points=[vert_wm_pred_tensor])  # [minibatch, num_points, 3]
+                pointcloud_gt = Pointclouds(points=[vert_gt_tensor])  # [minibatch, num_points, 3]
+
+                # 计算 Chamfer 损失
+                chamfer_loss_wm = chamfer_distance(pointcloud_pred, pointcloud_gt)[0]
+                chamfer_loss_wm = torch.tensor(chamfer_loss_wm) 
+                chamfer_losses = list(chamfer_losses)
+                chamfer_losses.append(chamfer_loss_wm.item()) 
+
+
+                # 打印和记录损失
+                logger.info(f"Chamfer loss for wm surface: {chamfer_loss_wm.item()}")
+
 
             # torch.Tensor -> numpy.array
             vert_wm_align = vert_wm[0].cpu().numpy()
@@ -246,6 +297,7 @@ if __name__ == '__main__':
             elif surf_hemi == 'right':
                 vert_wm_orig = vert_wm_align.copy()
                 vert_pial_orig = vert_pial_align.copy()
+            
             vert_wm_orig = apply_affine_mat(
                 vert_wm_orig, affine_in)
             vert_pial_orig = apply_affine_mat(
@@ -255,24 +307,27 @@ if __name__ == '__main__':
             vert_mid_orig = (vert_wm_orig + vert_pial_orig)/2
 
             # save as .surf.gii
-            save_gifti_surface(
-                vert_wm_orig, face_orig,
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_wm_30.surf.gii',
-                surf_hemi=surf_hemi, surf_type='wm')
-            save_gifti_surface(
-                vert_pial_orig, face_orig, 
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_pial.surf.gii',
-                surf_hemi=surf_hemi, surf_type='pial')
-            save_gifti_surface(
-                vert_mid_orig, face_orig, 
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_midthickness.surf.gii',
-                surf_hemi=surf_hemi, surf_type='midthickness')
+            # save_gifti_surface(
+            #     vert_wm_orig, face_orig,
+            #     save_dir=subj_out_dir+'repeat_hemi-'+surf_hemi+'_wm_220.surf.gii',
+            #     surf_hemi=surf_hemi, surf_type='wm')
+            # save_gifti_surface(
+            #     vert_pial_orig, face_orig, 
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_pial.surf.gii',
+            #     surf_hemi=surf_hemi, surf_type='pial')
+            # save_gifti_surface(
+            #     vert_mid_orig, face_orig, 
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_midthickness.surf.gii',
+            #     surf_hemi=surf_hemi, surf_type='midthickness')
 
             # send to gpu for the following processing
             vert_wm = torch.Tensor(vert_wm_orig).unsqueeze(0).to(device)
             vert_pial = torch.Tensor(vert_pial_orig).unsqueeze(0).to(device)
             vert_mid = torch.Tensor(vert_mid_orig).unsqueeze(0).to(device)
             face = torch.LongTensor(face_orig).unsqueeze(0).to(device)
+
+            vert_gt_wm = torch.tensor(vert_wm_orig, dtype=torch.float32, device=device)  # ground truth wm
+            # vert_gt_pial = torch.tensor(vert_pial_orig, dtype=torch.float32, device=device)  # ground truth pial
 
             t_surf_end = time.time()
             t_surf = t_surf_end - t_surf_start
@@ -290,26 +345,26 @@ if __name__ == '__main__':
             thickness = metric_dilation(
                 torch.Tensor(thickness[None,:,None]).to(device),
                 face, n_iters=10)
-            save_gifti_metric(
-                metric=thickness,
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_thickness.shape.gii',
-                surf_hemi=surf_hemi, metric_type='thickness')
+            # save_gifti_metric(
+            #     metric=thickness,
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_thickness.shape.gii',
+            #     surf_hemi=surf_hemi, metric_type='thickness')
             logger.info('Done.')
             
             logger.info('Estimate curvature ...', end=' ')
             curv = curvature(vert_wm, face, smooth_iters=5)
-            save_gifti_metric(
-                metric=curv, 
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_curv.shape.gii',
-                surf_hemi=surf_hemi, metric_type='curv')
+            # save_gifti_metric(
+            #     metric=curv, 
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_curv.shape.gii',
+            #     surf_hemi=surf_hemi, metric_type='curv')
             logger.info('Done.')
 
             logger.info('Estimate sulcal depth ...', end=' ')
             sulc = sulcal_depth(vert_wm, face, verbose=False)
-            save_gifti_metric(
-                metric=sulc,
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_sulc.shape.gii',
-                surf_hemi=surf_hemi, metric_type='sulc')
+            # save_gifti_metric(
+            #     metric=sulc,
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_sulc.shape.gii',
+            #     surf_hemi=surf_hemi, metric_type='sulc')
             logger.info('Done.')
             t_feature_end = time.time()
             t_feature = t_feature_end - t_feature_start
@@ -335,14 +390,14 @@ if __name__ == '__main__':
                 vert_vinflated_orig = vert_vinflated[0].cpu().numpy()
 
             # save as .surf.gii
-            save_gifti_surface(
-                vert_inflated_orig, face_orig, 
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_inflated.surf.gii',
-                surf_hemi=surf_hemi, surf_type='inflated')
-            save_gifti_surface(
-                vert_vinflated_orig, face_orig, 
-                save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_vinflated.surf.gii',
-                surf_hemi=surf_hemi, surf_type='vinflated')
+            # save_gifti_surface(
+            #     vert_inflated_orig, face_orig, 
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_inflated.surf.gii',
+            #     surf_hemi=surf_hemi, surf_type='inflated')
+            # save_gifti_surface(
+            #     vert_vinflated_orig, face_orig, 
+            #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_vinflated.surf.gii',
+            #     surf_hemi=surf_hemi, surf_type='vinflated')
 
             t_inflate_end = time.time()
             t_inflate = t_inflate_end - t_inflate_start
@@ -373,3 +428,12 @@ if __name__ == '__main__':
             print(f'Average cortical feature estimation time per subject: {total_feature_time / num_subjects:.4f} sec')
             print(f'Average surface inflation time per subject: {total_inflate_time / num_subjects:.4f} sec')
             print('========================================')
+
+        chamfer_losses = np.array(chamfer_losses)   # 转换为 NumPy 数组进行计算
+        max_loss = np.max(chamfer_losses)
+        min_loss = np.min(chamfer_losses)
+        mean_loss = np.mean(chamfer_losses)
+        std_loss = np.std(chamfer_losses)
+
+        # 打印统计值
+        logger.info(f"Chamfer Loss - Max: {max_loss}, Min: {min_loss}, Mean: {mean_loss}, Std: {std_loss}")
