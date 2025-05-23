@@ -146,11 +146,11 @@ nn_surf_right_pial = SurfDeform( # done
     C_hid=[8,16,32,32,32,32], C_in=1, inshape=[160,304,256], sigma=1.0, device=device)
 
 nn_surf_left_wm.load_state_dict( # training
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_03/model_hemi-left_wm_0001_70epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_300epochs.pt', map_location=device))
 nn_surf_right_wm.load_state_dict(
     torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-right_wm_0001_290epochs.pt', map_location=device))
 nn_surf_left_pial.load_state_dict(
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1_pial/model_hemi-left_pial_0001_290epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1_pial/model_hemi-left_pial_0001_300epochs.pt', map_location=device))
 nn_surf_right_pial.load_state_dict(
     torch.load('./surface/model/model_hemi-right_pial.pt', map_location=device))
 
@@ -315,10 +315,7 @@ if __name__ == '__main__':
                 chamfer_losses = list(chamfer_losses)
                 chamfer_losses.append(chamfer_loss_wm.item())
                 
-                recon_loss, match_counts = chamfer_with_match_count(pointcloud_pred, pointcloud_gt)
-                    # 统计每个 batch 中，GT 点被匹配次数 > 1 的点的个数
-                    # repeated_matches = (match_counts > 1).float().sum(dim=1)  # shape: [B]
-                    # 可选：取 batch 中的平均作为惩罚项（你也可以选择求和）
+                _, match_counts = chamfer_with_match_count(pointcloud_pred, pointcloud_gt)
                 match_counts_tensor = match_counts[0]  # 取出列表里的 Tensor
                 repeated_matches = (match_counts_tensor > 1).sum()  # 统计大于1的个数
                 repeat_loss = repeated_matches.float().mean()   # 可作为损失函数值
@@ -357,7 +354,7 @@ if __name__ == '__main__':
             # save as .surf.gii
             # save_gifti_surface(
             #     vert_wm_orig, face_orig,
-            #     save_dir=subj_out_dir+'repeat_hemi-'+surf_hemi+'_wm_220.surf.gii',
+            #     save_dir=subj_out_dir+'monai03_hemi-'+surf_hemi+'_wm_best.surf.gii',
             #     surf_hemi=surf_hemi, surf_type='wm')
             # save_gifti_surface(
             #     vert_pial_orig, face_orig, 
