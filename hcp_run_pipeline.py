@@ -16,6 +16,8 @@ from ants.utils.bias_correction import n4_bias_field_correction
 from pytorch3d.loss import chamfer_distance
 from pytorch3d.structures import Meshes
 from pytorch3d.structures import Pointclouds
+from pytorch3d.ops import knn_points
+
 from seg.unet import UNet
 from surface.net import SurfDeform
 from sphere.net.sunet import SphereDeform
@@ -51,8 +53,41 @@ from utils.metric import (
     myelin_map,
     smooth_myelin_map)
 
-# from preprocess import extract_image as ei
-# from preprocess import get_metadata as gm # type: ignore
+
+def chamfer_with_match_count(pred, gt):
+    """
+    Inputs:
+    - pred: (B, N, 3) 预测点集
+    - gt: (B, M, 3) 真实点集
+    Returns:
+    - chamfer_loss: scalar
+    - match_counts: list[(M,) tensor] 每个 batch 中真实点被匹配的次数
+    """
+
+    # 若输入是 Pointclouds 对象，则转换为 padded tensor
+    if isinstance(pred, Pointclouds):
+        pred = pred.points_padded()
+    if isinstance(gt, Pointclouds):
+        gt = gt.points_padded()
+
+    # 计算 Chamfer 距离（原始 loss）
+    chamfer_loss, _ = chamfer_distance(pred, gt)
+
+    # 用 KNN 搜索 pred->gt 最近邻，取最近的1个点
+    knn_pred_to_gt = knn_points(pred, gt, K=1)
+
+    # 获得匹配到的 gt 中的索引，形状为 (B, N, 1)
+    indices = knn_pred_to_gt.idx[..., 0]  # 去掉最后一维 → (B, N)
+
+    # 对每个 batch 中的 gt 点统计被匹配次数
+    B, N = indices.shape
+    M = gt.shape[1]
+    match_counts = []
+    for b in range(B):
+        counts = torch.bincount(indices[b], minlength=M)
+        match_counts.append(counts)
+
+    return chamfer_loss, match_counts
 
 # ============ load hyperparameters ============
 parser = argparse.ArgumentParser(description="dHCP DL Neonatal Pipeline")
@@ -111,7 +146,7 @@ nn_surf_right_pial = SurfDeform( # done
     C_hid=[8,16,32,32,32,32], C_in=1, inshape=[160,304,256], sigma=1.0, device=device)
 
 nn_surf_left_wm.load_state_dict( # training
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_220epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_03/model_hemi-left_wm_0001_70epochs.pt', map_location=device))
 nn_surf_right_wm.load_state_dict(
     torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-right_wm_0001_290epochs.pt', map_location=device))
 nn_surf_left_pial.load_state_dict(
@@ -160,6 +195,7 @@ if __name__ == '__main__':
     t_feature = 0
     t_inflate = 0
     chamfer_losses = []
+    repeat_losses = []
     start_time = time.time()
     subj_list = sorted(glob.glob(in_dir + '**/*' + t2_suffix, recursive=True))
     for subj_t2_dir in tqdm(subj_list): # switch to t2
@@ -277,7 +313,19 @@ if __name__ == '__main__':
                 chamfer_loss_wm = chamfer_distance(pointcloud_pred, pointcloud_gt)[0]
                 chamfer_loss_wm = torch.tensor(chamfer_loss_wm) 
                 chamfer_losses = list(chamfer_losses)
-                chamfer_losses.append(chamfer_loss_wm.item()) 
+                chamfer_losses.append(chamfer_loss_wm.item())
+                
+                recon_loss, match_counts = chamfer_with_match_count(pointcloud_pred, pointcloud_gt)
+                    # 统计每个 batch 中，GT 点被匹配次数 > 1 的点的个数
+                    # repeated_matches = (match_counts > 1).float().sum(dim=1)  # shape: [B]
+                    # 可选：取 batch 中的平均作为惩罚项（你也可以选择求和）
+                match_counts_tensor = match_counts[0]  # 取出列表里的 Tensor
+                repeated_matches = (match_counts_tensor > 1).sum()  # 统计大于1的个数
+                repeat_loss = repeated_matches.float().mean()   # 可作为损失函数值
+
+                repeat_losses = list(repeat_losses)
+                repeat_losses.append(repeat_loss.item())
+                 
 
 
                 # 打印和记录损失
@@ -437,3 +485,10 @@ if __name__ == '__main__':
 
         # 打印统计值
         logger.info(f"Chamfer Loss - Max: {max_loss}, Min: {min_loss}, Mean: {mean_loss}, Std: {std_loss}")
+        repeat_losses = np.array(repeat_losses)   # 转换为 NumPy 数组进行计算
+        rmax_loss = np.max(repeat_losses)
+        rmin_loss = np.min(repeat_losses)
+        rmean_loss = np.mean(repeat_losses)
+        rstd_loss = np.std(repeat_losses)
+        logger.info(f"repeat Loss - Max: {rmax_loss}, Min: {rmin_loss}, Mean: {rmean_loss}, Std: {rstd_loss}")
+
