@@ -95,7 +95,7 @@ parser = argparse.ArgumentParser(description="dHCP DL Neonatal Pipeline")
 #                     help='Diectory containing input images.')
 # parser.add_argument('--out_dir', default='/root/autodl-tmp/output/test/', type=str,
 #                     help='Directory for saving the output of the pipeline.')
-parser.add_argument('--in_dir', default='/root/autodl-tmp/hcp1200_dataset/HCP1200_split/test/', type=str, # TODO
+parser.add_argument('--in_dir', default='/root/autodl-tmp/hcp1200/sample_test/input/', type=str, # TODO
                     help='Diectory containing input images.')
 parser.add_argument('--out_dir', default='/root/autodl-tmp/hcp1200/sample_test/output/', type=str, # TODO
                     help='Directory for saving the output of the pipeline.')
@@ -146,11 +146,11 @@ nn_surf_right_pial = SurfDeform( # done
     C_hid=[8,16,32,32,32,32], C_in=1, inshape=[160,304,256], sigma=1.0, device=device)
 
 nn_surf_left_wm.load_state_dict( # training
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-left_wm_0001_300epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_01/model-0.1_hemi-left_wm_0003_230epochs.pt', map_location=device))
 nn_surf_right_wm.load_state_dict(
     torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/model_hemi-right_wm_0001_290epochs.pt', map_location=device))
 nn_surf_left_pial.load_state_dict(
-    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1_pial/model_hemi-left_pial_0001_300epochs.pt', map_location=device))
+    torch.load('/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1_pial/model_hemi_nc_-left_pial_0001_90epochs.pt', map_location=device))
 nn_surf_right_pial.load_state_dict(
     torch.load('./surface/model/model_hemi-right_pial.pt', map_location=device))
 
@@ -352,10 +352,10 @@ if __name__ == '__main__':
             vert_mid_orig = (vert_wm_orig + vert_pial_orig)/2
 
             # save as .surf.gii
-            # save_gifti_surface(
-            #     vert_wm_orig, face_orig,
-            #     save_dir=subj_out_dir+'monai03_hemi-'+surf_hemi+'_wm_best.surf.gii',
-            #     surf_hemi=surf_hemi, surf_type='wm')
+            save_gifti_surface(
+                vert_wm_orig, face_orig,
+                save_dir=subj_out_dir+'_01monai_hemi-'+surf_hemi+'_wm_best.surf.gii',
+                surf_hemi=surf_hemi, surf_type='wm')
             # save_gifti_surface(
             #     vert_pial_orig, face_orig, 
             #     save_dir=subj_out_dir+'_hemi-'+surf_hemi+'_pial.surf.gii',
