@@ -1,0 +1,25 @@
+========== Runtime Statistics ==========
+Surface Reconstruction Time:
+  Mean     = 2.1941 sec
+  Std      = 0.3219 sec
+  Max      = 5.2931 sec
+  Min      = 2.1264 sec
+----------------------------------------
+Feature Estimation Time:
+  Mean     = 2.2790 sec
+  Std      = 0.0351 sec
+  Max      = 2.3851 sec
+  Min      = 2.2072 sec
+----------------------------------------
+Surface Inflation Time:
+  Mean     = 3.0481 sec
+  Std      = 0.0199 sec
+  Max      = 3.1426 sec
+  Min      = 3.0163 sec
+----------------------------------------
+Total Time per Subject:
+  Mean     = 8.7873 sec
+  Std      = 0.3406 sec
+  Max      = 12.0190 sec
+  Min      = 8.6156 sec
+---------------------------------------
