@@ -112,8 +112,8 @@ def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, 
 # log_file_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all/log_hemi-left_wm_0002.log'
 # save_img_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all/log_hemi-left_wm_0002.png'
 
-log_file_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_soft_repeat_5_1/log_hemi-left_wm_0001.log'
-save_img_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_soft_repeat_5_1/log_hemi-left_wm_0001.png'
+log_file_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_1/log_hemi-left_wm_0001.log'
+save_img_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_1/log_hemi-left_wm_0001.png'
 
 # train_losses, val_rocon_losses, val_nc_losses, val_edge_losses  = parse_log_file(log_file_path)
 # plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, save_path=save_img_path)
