@@ -7,6 +7,8 @@ def parse_log_file(log_path):
     val_nc_losses = {}
     val_edge_losses = {}
     val_repeat_losses = {}
+    val_density_losses = {}
+    
 
     with open(log_path, 'r') as f:
         lines = f.readlines()
@@ -41,21 +43,27 @@ def parse_log_file(log_path):
             if match_val_repeat_loss:
                 val_repeat_losses[val_epoch_buffer] = float(match_val_repeat_loss.group(1))
 
+            match_val_density_loss = re.search(r"density error:([\d\.]+)", line)
+            if match_val_density_loss:
+                val_density_losses[val_epoch_buffer] = float(match_val_density_loss.group(1))
+
 
             if (val_epoch_buffer in val_rocon_losses 
                 and val_epoch_buffer in val_nc_losses 
                 and val_epoch_buffer in val_edge_losses
                 and val_epoch_buffer in val_repeat_losses 
+                and val_epoch_buffer in val_density_losses 
+
                 ):
                 val_epoch_buffer = None
 
     # return train_losses, val_rocon_losses, val_nc_losses, val_edge_losses
-    return train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses
+    return train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses,  val_density_losses
 
 
 
 # def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, save_path='loss_curve.png'):
-def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses, save_path='loss_curve.png'):
+def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses,val_density_losses, save_path='loss_curve.png'):
 
     epochs_train = sorted(train_losses.keys())
     losses_train = [train_losses[e] for e in epochs_train]
@@ -65,6 +73,7 @@ def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, 
     losses_val_nc = [val_nc_losses.get(e, None) for e in epochs_val]
     losses_val_edge = [val_edge_losses.get(e, None) for e in epochs_val]
     losses_val_repeat = [val_repeat_losses.get(e, None) for e in epochs_val]
+    losses_val_density = [val_density_losses.get(e, None) for e in epochs_val]
 
     # 计算组合验证损失：recon + 0.3 × edge + 3 × nc
     losses_val_combined = []
@@ -73,7 +82,9 @@ def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, 
         edge = val_edge_losses.get(e, 0)
         nc = val_nc_losses.get(e, 0)
         repeat = val_repeat_losses.get(e, 0)
-        combined = recon + 0.3 * edge + 3 * nc +0.0001 * repeat
+        density = val_density_losses.get(e, 0)
+
+        combined = recon + 0.3 * edge + 3 * nc + 0.1 * density
         losses_val_combined.append(combined)
 
     # 绘图
@@ -89,6 +100,10 @@ def plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, 
         # 直接乘上 0.0001 来进行缩放
         plt.plot(epochs_val, [0.0001 * loss for loss in losses_val_repeat], 
                 label='1e-4 * Validation Repeat Loss', color='orange', marker='s', linestyle='--')
+    if any(losses_val_density):
+        # 直接乘上 0.0001 来进行缩放
+        plt.plot(epochs_val, [0.1 * loss for loss in losses_val_density], 
+                label='1e-4 * Validation Repeat Loss', color='pink', marker='s', linestyle='--')
 
     if any(losses_val_combined):
         plt.plot(epochs_val, losses_val_combined, label='Validation Combined Loss', color='purple')
@@ -117,5 +132,5 @@ save_img_path = '/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_
 
 # train_losses, val_rocon_losses, val_nc_losses, val_edge_losses  = parse_log_file(log_file_path)
 # plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, save_path=save_img_path)
-train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses  = parse_log_file(log_file_path)
-plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses, save_path=save_img_path)
+train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses, val_density_losses  = parse_log_file(log_file_path)
+plot_losses(train_losses, val_rocon_losses, val_nc_losses, val_edge_losses, val_repeat_losses, val_density_losses,save_path=save_img_path)
