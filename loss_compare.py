@@ -5,15 +5,17 @@ import matplotlib.pyplot as plt
 # 日志文件路径和标签
 log_paths = [
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_t2/log_hemi-left_wm_0001.log",
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t1/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_03/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_01/log_hemi-0.1left_wm_0003.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_5_1/log_hemi-left_wm_0001.log",
-    "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_1/log_hemi-left_wm_0001.log"
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_1/log_hemi-left_wm_0001.log",
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t1_repeat_soft_5_1/log_hemi-left_wm_0001.log"
 
 ]
-labels = ['T2w (baseline)','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat']
-colors = ['yellow', 'red', 'black', 'blue', 'purple','green']
+labels = ['T2w (baseline)','T1w','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat', 'T1w+Loss_soft_repeat']
+colors = ['yellow','pink', 'red', 'black', 'blue', 'purple','green','orange']
 
 
 '''
@@ -87,8 +89,8 @@ plt.ylabel("Validation Recon Error")
 plt.title("Validation Recon Error Comparison Across Logs")
 plt.legend()
 plt.grid(True)
-# plt.ylim(0.85, 1.5)
+plt.ylim(0.70, 1.25)
 plt.tight_layout()
-plt.savefig("valid_recon_comparison.png", dpi=300)
-# plt.savefig("valid_recon_comparison_focus.png", dpi=300)
+# plt.savefig("valid_recon_comparison.png", dpi=300)
+plt.savefig("valid_recon_comparison_focus.png", dpi=300)
 
