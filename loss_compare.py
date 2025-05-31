@@ -4,18 +4,19 @@ import matplotlib.pyplot as plt
 
 # 日志文件路径和标签
 log_paths = [
-    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t2/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_t1/log_hemi-left_wm_0001.log",
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t2/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_5_1/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_03/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_monai_01/log_hemi-0.1left_wm_0003.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_5_1/log_hemi-left_wm_0001.log",
     "/root/autodl-tmp/hcp1200/surface/ckpts_all_multi_repeat_soft_5_1/log_hemi-left_wm_0001.log",
-    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t1_repeat_soft_5_1/log_hemi-left_wm_0001.log"
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t1_repeat_soft_5_1/log_hemi-left_wm_0001.log",
+    "/root/autodl-tmp/hcp1200/surface/ckpts_all_t2_repeat_soft_5_1/log_hemi-left_wm_0001.log"
 
 ]
-labels = ['T2w (baseline)','T1w','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat', 'T1w+Loss_soft_repeat']
-colors = ['yellow','pink', 'red', 'black', 'orange', 'purple','green','blue']
+labels = ['T1w','T2w (baseline)','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat', 'T1w+Loss_soft_repeat','T2w+Loss_soft_repeat']
+colors = ['skyblue','yellow', 'mediumseagreen', 'darkgreen', 'orange', 'purple','lime','blue','darkgoldenrod']
 
 
 '''
