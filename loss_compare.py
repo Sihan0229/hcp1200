@@ -15,7 +15,7 @@ log_paths = [
 
 ]
 labels = ['T2w (baseline)','T1w','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat', 'T1w+Loss_soft_repeat']
-colors = ['yellow','pink', 'red', 'black', 'blue', 'purple','green','orange']
+colors = ['yellow','pink', 'red', 'black', 'orange', 'purple','green','blue']
 
 
 '''
