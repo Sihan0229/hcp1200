@@ -17,6 +17,8 @@ log_paths = [
 ]
 labels = ['T1w','T2w (baseline)','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat', 'T1w+Loss_soft_repeat','T2w+Loss_soft_repeat']
 colors = ['skyblue','yellow', 'mediumseagreen', 'darkgreen', 'orange', 'purple','lime','blue','darkgoldenrod']
+# labels = ['T2w (baseline)','T1w+T2w', 'T1w+T2w+30%MONAI', 'T1w+T2w+10%MONAI', 'T1w+T2w+Loss_repeat', 'T1w+T2w+Loss_soft_repeat']
+# colors = ['orange', 'red', 'black', 'blue', 'purple','green']
 
 
 '''
@@ -90,7 +92,7 @@ plt.ylabel("Validation Recon Error")
 plt.title("Validation Recon Error Comparison Across Logs")
 plt.legend()
 plt.grid(True)
-plt.ylim(0.70, 1.25)
+plt.ylim(0.7, 1.2)
 plt.tight_layout()
 # plt.savefig("valid_recon_comparison.png", dpi=300)
 plt.savefig("valid_recon_comparison_focus.png", dpi=300)
